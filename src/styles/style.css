@@ -260,6 +260,8 @@ h4 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    margin-right: 3rem;
+    /* Added spacing */
 }
 
 .logo__img {
