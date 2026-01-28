@@ -3,64 +3,122 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Maquinaria | Limpiezas Torrenueva">
     <main>
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <div class="page-hero__bg">
-                <img src="/maquinas-hero-final.png" alt="Maquinaria Profesional" class="page-hero__img">
-            </div>
-            <div class="page-hero__overlay"></div>
-            <div class="container page-hero__content">
-                <h1 class="page-hero__title">Tecnología de Vanguardia</h1>
-                <p class="page-hero__subtitle">Contamos con flota propia de maquinaria industrial para garantizar la máxima eficacia.</p>
-            </div>
-        </section>
-
-        <section class="section-padding">
+        <section class="machines-hero">
             <div class="container">
-                <div class="section-header center-text">
-                    <span class="section-tag">Equipamiento</span>
-                    <h2 class="section-title">Nuestra Flota</h2>
-                    <p class="text-body" style="max-width: 700px; margin: 0 auto;">Invertimos constantemente en maquinaria de última generación para ofrecer resultados superiores en menos tiempo.</p>
+                <div class="machines-hero__content">
+                    <h1 class="machines-hero__title">MAQUINARIA INDUSTRIAL <br><span style="color:white">PROFESIONAL</span></h1>
+                    <p class="machines-hero__desc">Venta, alquiler y servicio técnico oficial. La mejor tecnología para la limpieza de grandes superficies.</p>
+                    <a href="#catalogo" class="button button--white">Ver Catálogo</a>
                 </div>
-
-                <div class="grid grid--2-cols" style="gap: 4rem; margin-top: 4rem;">
-                    
-                    <!-- Machine 1 -->
-                    <div class="machine-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                        <img src="/fregadora-conductor-final.png" alt="Fregadora Conductor Sentado" style="width: 100%; height: 300px; object-fit: cover;">
-                        <div style="padding: 2rem;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1e293b;">Fregadoras de Conductor Sentado</h3>
-                            <p style="color: #64748b; margin-bottom: 1.5rem;">Ideales para grandes superficies como garajes comunitarios, naves industriales y centros comerciales. Permiten un alto rendimiento de limpieza por hora, fregando y secando en una sola pasada.</p>
-                            <ul class="features-list">
-                                <li class="features-list__item">✓ Alto rendimiento (m²/h)</li>
-                                <li class="features-list__item">✓ Secado inmediato</li>
-                                <li class="features-list__item">✓ Presión de cepillado ajustable</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Machine 2 -->
-                    <div class="machine-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                        <img src="/fregadora-manual-final.png" alt="Fregadora Manual" style="width: 100%; height: 300px; object-fit: cover;">
-                        <div style="padding: 2rem;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #1e293b;">Fregadoras Manuales</h3>
-                            <p style="color: #64748b; margin-bottom: 1.5rem;">Perfectas para espacios medianos o con más obstáculos, como pasillos, zonas comunes amplias o garajes pequeños. Su maniobrabilidad garantiza llegar a todos los rincones.</p>
-                            <ul class="features-list">
-                                <li class="features-list__item">✓ Gran maniobrabilidad</li>
-                                <li class="features-list__item">✓ Acceso a zonas difíciles</li>
-                                <li class="features-list__item">✓ Silenciosas y eficientes</li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div class="machines-hero__image-wrapper">
+                    <img src="/maquinas-hero-final.png" alt="Maquinaria Limpiezas Torrenueva">
                 </div>
             </div>
         </section>
 
-        <section class="section-padding bg-primary text-white" style="text-align: center;">
+        <!-- Fleet Image Section (Requested) -->
+        <section class="section-padding" style="padding-bottom: 0;">
             <div class="container">
-                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Compromiso con la Calidad</h2>
-                <p style="max-width: 700px; margin: 0 auto 2rem; opacity: 0.9;">Toda nuestra maquinaria sigue estrictos controles de mantenimiento para asegurar que siempre está lista para el servicio. Además, utilizamos productos químicos biodegradables compatibles con nuestros equipos.</p>
+                <div class="center-text">
+                     <h2 class="section-title">Nuestra Flota de Maquinaria</h2>
+                     <p class="text-body" style="margin: 0 auto 2rem;">Disponemos de una amplia gama de fregadoras y barredoras listas para cualquier intervención.</p>
+                </div>
+                <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="/maquinas-hero-v4.png" alt="Flota de Maquinas Limpiezas Torrenueva" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog -->
+        <section id="catalogo" class="catalog-section">
+            <div class="container">
+                <div class="catalog-header center-text">
+                    <span class="section-tag">Catálogo</span>
+                    <h2 class="catalog-title">Modelos Disponibles</h2>
+                </div>
+
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="/fregadora-conductor-final.png" alt="Fregadora Conductor" class="product-img">
+                        </div>
+                        <div class="product-content">
+                            <span class="product-badge">Premium</span>
+                            <h3 class="product-title">Fregadora Conductor Sentado T7</h3>
+                            <p class="product-desc">Ideal para garajes de más de 2000m². Gran autonomía y ancho de trabajo de 85cm.</p>
+                            <div class="price-box">
+                                <div class="price-row">
+                                    <div class="price-col">
+                                        <span class="price-label">Precio</span>
+                                        <span class="price-amount">Consultar</span>
+                                    </div>
+                                    <div class="price-col" style="text-align: right;">
+                                        <span class="price-label">Disponibilidad</span>
+                                        <span style="color: #10b981; font-weight:700;">En Stock</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <a href="/contacto" class="btn-product-dark">Solicitar Info</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="/fregadora-manual-final.png" alt="Fregadora Manual" class="product-img">
+                        </div>
+                        <div class="product-content">
+                            <span class="product-badge">Estándar</span>
+                            <h3 class="product-title">Fregadora Manual T300</h3>
+                            <p class="product-desc">Compacta y potente. Perfecta para pasillos, supermercados y zonas con obstáculos.</p>
+                            <div class="price-box">
+                                <div class="price-row">
+                                    <div class="price-col">
+                                        <span class="price-label">Precio</span>
+                                        <span class="price-amount">Consultar</span>
+                                    </div>
+                                    <div class="price-col" style="text-align: right;">
+                                        <span class="price-label">Disponibilidad</span>
+                                        <span style="color: #10b981; font-weight:700;">En Stock</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <a href="/contacto" class="btn-product-dark">Solicitar Info</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="/limpieza-industrial.png" alt="Hidrolimpiadora" class="product-img">
+                        </div>
+                        <div class="product-content">
+                            <span class="product-badge">Industrial</span>
+                            <h3 class="product-title">Hidrolimpiadora Alta Presión</h3>
+                            <p class="product-desc">Hasta 200 bares de presión para arrancar la suciedad más incrustada en fachadas y suelos.</p>
+                            <div class="price-box">
+                                <div class="price-row">
+                                    <div class="price-col">
+                                        <span class="price-label">Precio</span>
+                                        <span class="price-amount">Consultar</span>
+                                    </div>
+                                    <div class="price-col" style="text-align: right;">
+                                        <span class="price-label">Disponibilidad</span>
+                                        <span style="color: #f59e0b; font-weight:700;">Bajo Pedido</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-actions">
+                                <a href="/contacto" class="btn-product-dark">Solicitar Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
