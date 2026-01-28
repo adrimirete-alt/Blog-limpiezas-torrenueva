@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Blog | Limpiezas Torrenueva">
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="page-hero__bg">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2072&auto=format&fit=crop"
+                    alt="Blog de Limpieza" class="page-hero__img">
+            </div>
+            <div class="page-hero__overlay"></div>
+            <div class="container page-hero__content">
+                <h1 class="page-hero__title">Nuestro Blog</h1>
+                <p class="page-hero__subtitle">Noticias, consejos y actualizaciones sobre limpieza y mantenimiento.</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="services__grid"> <!-- Reusing services grid for blog layout consistency -->
+
+                    <article class="service-card">
+                        <div class="service-card__image">
+                            <img src="/blog-garajes.png" alt="Blog Post 1">
+                        </div>
+                        <div class="service-card__content">
+                            <span class="section-tag">Consejos</span>
+                            <h3 class="service-card__title">Cómo mantener el brillo en los suelos de garaje</h3>
+                            <p class="service-card__desc">Descubre los secretos para que el pavimento de tu garaje luzca
+                                como profesional día tras día.</p>
+                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__image">
+                            <img src="/blog-comunidades.png" alt="Blog Post 2">
+                        </div>
+                        <div class="service-card__content">
+                            <span class="section-tag">Comunidades</span>
+                            <h3 class="service-card__title">La importancia de la limpieza en comunidades</h3>
+                            <p class="service-card__desc">Un entorno limpio mejora la convivencia y revaloriza la
+                                propiedad. Aquí te explicamos por qué.</p>
+                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-card__image">
+                            <img src="/blog-maquinaria.png" alt="Blog Post 3">
+                        </div>
+                        <div class="service-card__content">
+                            <span class="section-tag">Novedades</span>
+                            <h3 class="service-card__title">Nueva maquinaria para grandes superficies</h3>
+                            <p class="service-card__desc">Incorporamos nuevas fregadoras industriales para ofrecer un
+                                servicio aún más rápido y eficiente.</p>
+                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

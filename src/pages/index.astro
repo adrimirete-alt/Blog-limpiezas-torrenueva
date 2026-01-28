@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <main>
+        <section class="hero">
+            <div class="hero__bg">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                    alt="Edificio moderno cristal" class="hero__img">
+                <div class="hero__overlay"></div>
+            </div>
+            <div class="container hero__content">
+                <div class="hero__text-wrapper">
+                    <div class="hero-badge reveal-text-delay">
+                        <span style="font-size: 1.2rem;">★</span>
+                        <span>Experiencia y Profesionalidad</span>
+                    </div>
+
+                    <h1 class="hero__title">
+                        <span class="reveal-text">LIMPIEZA TÉCNICA</span>
+                        <span class="reveal-text" style="color: #3b82f6;">PROFESIONAL</span>
+                    </h1>
+                    <p class="hero__subtitle reveal-text-delay">Especialistas en edificios altos, garajes, comunidades y
+                        grandes superficies en Torrevieja y Vega Baja. Maquinaria propia y personal cualificado.</p>
+                </div>
+                <div class="hero__actions reveal-up">
+                    <a href="/contacto" class="button button--white">PEDIR PRESUPUESTO</a>
+                    <a href="/servicios" class="button button--outline">NUESTROS SERVICIOS</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-indicator__text">Scroll</span>
+                <div class="scroll-indicator__line"></div>
+            </div>
+        </section>
+
+        <!-- New Blue Feature Section -->
+        <section class="features-blue">
+            <div class="container mobile-stack">
+                <div class="feature-blue-item">
+                    <h3 class="feature-blue-title">MAQUINARIA PROPIA</h3>
+                    <p class="feature-blue-desc">Equipamiento industrial de última generación para resultados óptimos.
+                    </p>
+                </div>
+                <div class="feature-blue-separator"></div>
+                <div class="feature-blue-item">
+                    <h3 class="feature-blue-title">PERSONAL CUALIFICADO</h3>
+                    <p class="feature-blue-desc">Equipo especializado con amplia experiencia en el sector.</p>
+                </div>
+                <div class="feature-blue-separator"></div>
+                <div class="feature-blue-item">
+                    <h3 class="feature-blue-title">PRESUPUESTO SIN COMPROMISO</h3>
+                    <p class="feature-blue-desc">Valoración gratuita y personalizada de sus necesidades.</p>
+                </div>
+            </div>
+        </section>
+        <section id="nosotros" class="about section-padding">
+            <div class="container grid grid--2-cols">
+                <div class="about__content">
+                    <span class="section-tag">Nuestra Esencia</span>
+                    <h2 class="section-title">Más que limpieza,<br>creamos bienestar.</h2>
+                    <p class="text-body">En Limpiezas Torrenueva, entendemos que un espacio limpio es fundamental para
+                        la calidad de vida. Nos dedicamos a transformar el mantenimiento de comunidades y edificios en
+                        una experiencia de excelencia y tranquilidad.</p>
+                    <ul class="features-list">
+                        <li class="features-list__item">
+                            <span class="check-icon">✓</span> Personal altamente cualificado
+                        </li>
+                        <li class="features-list__item">
+                            <span class="check-icon">✓</span> Tecnología y productos sostenibles
+                        </li>
+                        <li class="features-list__item">
+                            <span class="check-icon">✓</span> Supervisión constante de calidad
+                        </li>
+                    </ul>
+                </div>
+                <div class="about__image-wrapper parallax-image">
+                    <img src="/equipo-detalle.jpg" alt="Nuestro Equipo Profesional" class="about__img">
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="services section-padding">
+            <div class="container">
+                <div class="section-header center-text">
+                    <span class="section-tag">Servicios</span>
+                    <h2 class="section-title">Soluciones Integrales</h2>
+                </div>
+
+                <div class="services__grid">
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/comunidades.jpg" alt="Comunidades">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Comunidades</h3>
+                            <p class="service-card__desc">Mantenimiento diario de zonas comunes, escaleras y portales.
+                                Cuidamos la imagen de su hogar.</p>
+                            <a href="/servicios" class="link-arrow">Ver detalles <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/garaje.jpg" alt="Garajes">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Garajes</h3>
+                            <p class="service-card__desc">Limpieza especializada con maquinaria industrial para
+                                pavimentos, rampas y accesos.</p>
+                            <a href="/servicios" class="link-arrow">Ver detalles <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2000&auto=format&fit=crop"
+                                alt="Oficinas">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Oficinas</h3>
+                            <p class="service-card__desc">Limpieza integral de espacios de trabajo, mobiliario y
+                                cristales
+                                para un ambiente productivo.</p>
+                            <a href="/servicios" class="link-arrow">Ver detalles <span>→</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats section-padding bg-dark text-white">
+            <div class="container grid grid--4-cols">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="15">0</span>
+                    <span class="stat-label">Años de Experiencia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="200">0</span>
+                    <span class="stat-label">Clientes Satisfechos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">Profesionales</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">% Garantizado</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact section-padding">
+            <div class="container grid grid--2-cols contact-grid">
+                <div class="contact__info">
+                    <span class="section-tag">Contacto</span>
+                    <h2 class="section-title">Hablemos de su proyecto</h2>
+                    <p class="text-body">Estamos listos para ofrecerle la mejor solución de limpieza. Contáctenos para
+                        un presupuesto sin compromiso.</p>
+
+                    <div class="contact__details">
+                        <div class="contact__item">
+                            <h3>Email</h3>
+                            <a href="mailto:info@limpiezastorrenueva.com"><svg class="top-bar-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg> info@limpiezastorrenueva.com</a>
+                        </div>
+                        <div class="contact__item">
+                            <h3>Teléfono</h3>
+                            <a href="tel:+34604438618">+34 604 438 618</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact__form-wrapper">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" placeholder="Su nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="nombre@empresa.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" rows="4" placeholder="¿En qué podemos ayudarle?" required></textarea>
+                        </div>
+                        <button type="submit" class="button button--primary full-width">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

@@ -1,0 +1,31 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpiezas Torrenueva | Servicios de Limpieza Premium</title>
+    <!-- We will migrate fonts and styles to Layout next -->
+    <link rel="stylesheet" href="/src/styles/style.css">
+</head>
+<body>
+    <Header />
+    
+    <slot />
+
+    <Footer />
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/34604438618" class="whatsapp-btn" target="_blank" aria-label="Chat en WhatsApp">
+        <img src="/whatsapp_btn.png" alt="WhatsApp">
+    </a>
+
+    <!-- Imports scripts safely -->
+    <script>
+      import "../scripts/script.js";
+    </script>
+</body>
+</html>

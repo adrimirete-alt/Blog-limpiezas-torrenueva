@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Contacto | Limpiezas Torrenueva">
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="page-hero__bg">
+                <img src="https://images.unsplash.com/photo-1423666639041-f14d07295df5?q=80&w=2074&auto=format&fit=crop"
+                    alt="Contacto Limpiezas Torrenueva" class="page-hero__img">
+            </div>
+            <div class="page-hero__overlay"></div>
+            <div class="container page-hero__content">
+                <h1 class="page-hero__title">Contacte con Nosotros</h1>
+                <p class="page-hero__subtitle">Estamos a su disposición para resolver cualquier duda o necesidad de
+                    limpieza.</p>
+            </div>
+        </section>
+
+        <section class="contact section-padding">
+            <div class="container grid grid--2-cols contact-grid">
+                <div class="contact__info">
+                    <span class="section-tag">Contacto</span>
+                    <h2 class="section-title">Solicite su Presupuesto</h2>
+                    <p class="text-body">Cuéntenos qué necesita y elaboraremos un plan de limpieza a medida sin ningún
+                        compromiso.</p>
+
+                    <div class="contact__details">
+                        <div class="contact__item">
+                            <h3>Email</h3>
+                            <a href="mailto:info@limpiezastorrenueva.com"><svg class="top-bar-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> info@limpiezastorrenueva.com</a>
+                        </div>
+                        <div class="contact__item">
+                            <h3>Teléfono</h3>
+                            <a href="tel:+34604438618">+34 604 438 618</a>
+                        </div>
+                        <div class="contact__item">
+                            <h3>Horario</h3>
+                            <p>Lunes a Viernes: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact__form-wrapper">
+                    <!-- Updated with Formspree Action ID provided -->
+                    <form class="contact-form" action="https://formspree.io/f/mjgwnrdb" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="nombre" placeholder="Su nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="nombre@empresa.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono (Opcional)</label>
+                            <input type="tel" id="phone" name="telefono" placeholder="Su teléfono">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="mensaje" rows="4" placeholder="Detalles del servicio que necesita..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="button button--primary full-width">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

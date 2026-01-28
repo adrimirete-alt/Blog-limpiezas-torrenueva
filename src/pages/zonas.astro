@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Zonas de Actuación | Limpiezas Torrenueva">
+    <main>
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="page-hero__bg">
+                <img src="/zonas-hero.png" alt="Torrevieja y Vega Baja" class="page-hero__img">
+            </div>
+            <div class="page-hero__overlay"></div>
+            <div class="container page-hero__content">
+                <h1 class="page-hero__title">Dónde Trabajamos</h1>
+                <p class="page-hero__subtitle">Prestamos servicio en Torrevieja y toda la comarca de la Vega Baja.</p>
+            </div>
+        </section>
+
+        <!-- Main Content with Sticky Map -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="grid grid--2-cols" style="align-items: start; gap: 4rem;">
+                    
+                    <!-- Left Column: Content Cards -->
+                    <div class="zones-content">
+                        <div class="section-header">
+                            <span class="section-tag">Cobertura</span>
+                            <h2 class="section-title">Nuestra Zona de Acción</h2>
+                            <p class="text-body">Llegamos allí donde nos necesite. Nuestra logística nos permite cubrir eficazmente toda la zona costera y el interior de la Vega Baja.</p>
+                        </div>
+
+                        <!-- Card 1 -->
+                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Torrevieja (Sede Central)</h3>
+                            <p style="color: #64748b;">Cubrimos todos los barrios y urbanizaciones: El Acequión, Los Balcones, La Siesta, Aguas Nuevas, Centro, Playa del Cura, etc.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Orihuela Costa</h3>
+                            <p style="color: #64748b;">Punta Prima, Playa Flamenca, La Zenia, Cabo Roig, Villamartín, Campoamor. Servicio integral para grandes comunidades y urbanizaciones.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Guardamar y La Mata</h3>
+                            <p style="color: #64748b;">Servicio extendido a la zona norte de nuestra área de influencia, incluyendo La Mata y Guardamar del Segura.</p>
+                        </div>
+                        
+                        <!-- Card 4 -->
+                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
+                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Interior Vega Baja</h3>
+                            <p style="color: #64748b;">San Miguel de Salinas, Los Montesinos, Rojales, Ciudad Quesada y alrededores.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Sticky Map -->
+                    <div class="zones-map-wrapper" style="position: sticky; top: 100px;">
+                        <img src="/mapa-torrevieja.png" alt="Mapa de Cobertura" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+                        <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: #64748b;">
+                            * Mapa orientativo de nuestra zona principal de actuación.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="section-padding bg-dark text-white">
+            <div class="container center-text">
+                <span class="section-tag" style="background: rgba(255,255,255,0.1); color: white;">Proceso</span>
+                <h2 class="section-title">¿Cómo trabajamos?</h2>
+                <div class="grid grid--4-cols" style="margin-top: 4rem; gap: 2rem;">
+                    
+                    <div class="process-step">
+                        <div style="font-size: 4rem; font-weight: 700; color: #3b82f6; opacity: 0.5; margin-bottom: 1rem;">1</div>
+                        <h3 style="margin-bottom: 1rem;">Contacto</h3>
+                        <p style="opacity: 0.8;">Llámenos o escríbanos. Atendemos su solicitud rápidamente.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div style="font-size: 4rem; font-weight: 700; color: #3b82f6; opacity: 0.5; margin-bottom: 1rem;">2</div>
+                        <h3 style="margin-bottom: 1rem;">Visita</h3>
+                        <p style="opacity: 0.8;">Visitamos las instalaciones para valorar el trabajo in situ.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div style="font-size: 4rem; font-weight: 700; color: #3b82f6; opacity: 0.5; margin-bottom: 1rem;">3</div>
+                        <h3 style="margin-bottom: 1rem;">Presupuesto</h3>
+                        <p style="opacity: 0.8;">Le entregamos un presupuesto detallado y sin compromiso.</p>
+                    </div>
+
+                    <div class="process-step">
+                        <div style="font-size: 4rem; font-weight: 700; color: #3b82f6; opacity: 0.5; margin-bottom: 1rem;">4</div>
+                        <h3 style="margin-bottom: 1rem;">Ejecución</h3>
+                        <p style="opacity: 0.8;">Comenzamos el servicio en la fecha y hora acordadas.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Blue Section -->
+        <section class="section-padding bg-primary text-white">
+            <div class="container">
+                <div class="cta-blue-content-wrapper" style="display: flex; align-items: center; justify-content: space-between; gap: 4rem;">
+                    <div class="cta-blue-text" style="flex: 1;">
+                        <h2 class="cta-blue-title" style="font-size: 2.5rem; margin-bottom: 1.5rem;">Su confianza, nuestro mayor éxito</h2>
+                        <p class="cta-blue-subtitle" style="font-size: 1.25rem; opacity: 0.9;">Garantizamos resultados profesionales o volvemos a repasar el trabajo sin coste adicional.</p>
+                        <a href="/contacto" class="button button--white">Contactar Ahora</a>
+                    </div>
+                    <div class="cta-blue-image" style="flex: 0 0 300px;">
+                        <!-- Using the thumbs up cleaner image -->
+                        <img src="/cleaner_thumbs_up.png" alt="Limpiador profesional" style="border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
