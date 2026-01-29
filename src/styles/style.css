@@ -260,8 +260,11 @@ h4 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-right: 3rem;
-    /* Added spacing */
+    margin-right: 2rem;
+    white-space: nowrap;
+    /* Force single line - CRITICAL */
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
 .logo__img {
