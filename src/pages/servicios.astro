@@ -10,72 +10,92 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <div class="page-hero__overlay"></div>
             <div class="container page-hero__content">
-                <h1 class="page-hero__title">Servicios Profesionales</h1>
-                <p class="page-hero__subtitle">Soluciones integrales de limpieza adaptadas a sus necesidades específicas.</p>
+                <h1 class="page-hero__title">Nuestros Servicios</h1>
+                <p class="page-hero__subtitle">Soluciones profesionales adaptadas a cada espacio.</p>
             </div>
         </section>
 
-        <!-- Service 1: Comunidades -->
         <section class="section-padding">
-            <div class="container grid grid--2-cols" style="align-items: center;">
-                <div class="about__image-wrapper">
-                    <img src="/comunidades.jpg" alt="Limpieza de Comunidades" style="border-radius: 12px; height: 100%; object-fit: cover;">
-                </div>
-                <div class="about__content">
-                    <h2 class="section-title">Comunidades de Vecinos</h2>
-                    <p class="text-body">Ofrecemos un mantenimiento integral para comunidades de propietarios. Nos encargamos de que portales, escaleras, ascensores y zonas comunes luzcan impecables todos los días. Nuestro personal cualificado garantiza la higiene y el orden, mejorando la convivencia y la imagen de su edificio.</p>
-                    <ul class="features-list">
-                        <li class="features-list__item">✓ Limpieza diaria de portales</li>
-                        <li class="features-list__item">✓ Mantenimiento de suelos y cristales</li>
-                        <li class="features-list__item">✓ Higienización de ascensores</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Service 2: Garajes -->
-        <section class="section-padding bg-dark text-white">
-            <div class="container grid grid--2-cols" style="align-items: center;">
-                <div class="about__content">
-                    <h2 class="section-title" style="color: white;">Limpieza de Garajes</h2>
-                    <p class="text-body" style="color: #cbd5e1;">Especialistas en la limpieza técnica de garajes y aparcamientos. Eliminamos grasas, aceites y marcas de neumáticos utilizando maquinaria industrial específica (fregadoras mecánicas) y productos desengrasantes de alta potencia. Garantizamos la seguridad y la estética de su aparcamiento.</p>
-                    <ul class="features-list">
-                        <li class="features-list__item">✓ Fregado mecánico de pavimentos</li>
-                        <li class="features-list__item">✓ Limpieza de rampas y accesos</li>
-                        <li class="features-list__item">✓ Eliminación de manchas de aceite</li>
-                    </ul>
-                </div>
-                <div class="about__image-wrapper">
-                    <!-- Using garage image -->
-                    <img src="/garaje.jpg" alt="Limpieza de Garajes" style="border-radius: 12px; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </section>
-
-        <!-- Service 3: Grandes Superficies / Oficinas -->
-        <section class="section-padding">
-            <div class="container grid grid--2-cols" style="align-items: center;">
-                <div class="about__image-wrapper">
-                    <img src="/grandes-superficies-final.png" alt="Grandes Superficies" style="border-radius: 12px; height: 100%; object-fit: cover;">
-                </div>
-                <div class="about__content">
-                    <h2 class="section-title">Grandes Superficies y Oficinas</h2>
-                    <p class="text-body">Servicios adaptados para oficinas, centros comerciales y naves industriales. Entendemos que un entorno de trabajo limpio mejora la productividad. Realizamos limpiezas periódicas o puntuales (fin de obra, aperturas) con la máxima flexibilidad horaria para no interrumpir su actividad.</p>
-                    <ul class="features-list">
-                        <li class="features-list__item">✓ Limpieza de mobiliario y equipos</li>
-                        <li class="features-list__item">✓ Limpieza de cristales en altura</li>
-                        <li class="features-list__item">✓ Tratamientos de suelos</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="section-padding" style="background-color: #f1f5f9; text-align: center;">
             <div class="container">
-                <h2 class="section-title">¿Necesita un presupuesto a medida?</h2>
-                <p class="text-body" style="max-width: 600px; margin: 0 auto 2rem auto;">Contáctenos hoy mismo y uno de nuestros expertos evaluará sus instalaciones sin compromiso.</p>
-                <a href="/contacto" class="button button--primary">Solicitar Presupuesto</a>
+                <div class="services__grid">
+                    
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/comunidades.jpg" alt="Limpieza de Comunidades">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Comunidades</h3>
+                            <p class="service-card__desc">Limpieza de zonas comunes, portales, escaleras y ascensores. Mantenimiento y cristalizado de suelos.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/garaje.jpg" alt="Limpieza de Garajes">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Garajes</h3>
+                            <p class="service-card__desc">Fregado industrial de pavimentos con maquinaria especializada. Eliminación de manchas de grasa.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/grandes-superficies-final.png" alt="Grandes Superficies">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Oficinas y Naves</h3>
+                            <p class="service-card__desc">Limpieza de centros de trabajo, naves industriales y locales comerciales. Horarios flexibles.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/cristales-detalle.jpg" alt="Limpieza de Cristales">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Cristales</h3>
+                            <p class="service-card__desc">Limpieza de cristales en altura, escaparates y fachadas acristaladas con sistemas de seguridad.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/fin-obra.png" alt="Limpieza Fin de Obra">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Fin de Obra</h3>
+                            <p class="service-card__desc">Puesta a punto de viviendas y locales tras reformas. Eliminación de polvo y restos de obra.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+                     <div class="service-card">
+                        <div class="service-card__image">
+                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines">
+                        </div>
+                        <div class="service-card__content">
+                            <h3 class="service-card__title">Jardinería</h3>
+                            <p class="service-card__desc">Mantenimiento básico de zonas verdes y exteriores en comunidades y urbanizaciones.</p>
+                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-banner">
+            <div class="container">
+                <h2>¿No encuentra lo que busca?</h2>
+                <p>Realizamos servicios personalizados. Cuéntenos su caso.</p>
+                <div class="cta-banner-actions">
+                    <a href="/contacto" class="button button--white">Contactar</a>
+                </div>
             </div>
         </section>
     </main>
