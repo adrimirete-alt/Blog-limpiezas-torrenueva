@@ -854,8 +854,16 @@ h4 {
 }
 
 .service-card__image {
-    height: 250px;
+    height: 320px;
+    /* Increased significantly to show more image content */
     overflow: hidden;
+}
+
+.button--full-width {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .service-card__image img {
