@@ -85,8 +85,9 @@ import Layout from '../layouts/Layout.astro';
                 <div class="services__grid">
                      <!-- Gardening Card - Enhanced -->
                      <div class="service-card">
-                        <div class="service-card__image">
-                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines" style="object-position: top;">
+                        <div class="service-card__image" style="height: auto;">
+                            <!-- FORCE FULL IMAGE using aspect ratio and auto height -->
+                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines" style="width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; object-position: center;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Jardinería</h3>
@@ -118,8 +119,8 @@ import Layout from '../layouts/Layout.astro';
         <!-- CTA Section -->
         <section class="cta-banner">
             <div class="container">
-                <!-- Enlarge text and remove second sentence as requested -->
-                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Realizamos servicios personalizados.</h2>
+                <!-- Enlarge text, FORCE WHITE COLOR, and remove second sentence as requested -->
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #ffffff;">Realizamos servicios personalizados.</h2>
                 <div class="cta-banner-actions">
                     <!-- Enlarge button -->
                     <a href="/contacto" class="button button--white" style="padding: 1rem 2.5rem; font-size: 1.2rem;">CONTACTAR</a>
