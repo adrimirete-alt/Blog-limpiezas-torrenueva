@@ -15,13 +15,15 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </section>
 
-        <section class="section-padding">
+        <!-- Main Cleaning Services -->
+        <section class="section-padding" style="padding-bottom: 2rem;">
             <div class="container">
                 <div class="services__grid">
                     
                     <div class="service-card">
                         <div class="service-card__image">
-                            <img src="/comunidades.jpg" alt="Limpieza de Comunidades">
+                            <!-- Adjusted object-position to top to show cleaning action/face -->
+                            <img src="/comunidades.jpg" alt="Limpieza de Comunidades" style="object-position: top;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Comunidades</h3>
@@ -32,7 +34,8 @@ import Layout from '../layouts/Layout.astro';
 
                     <div class="service-card">
                         <div class="service-card__image">
-                            <img src="/garaje.jpg" alt="Limpieza de Garajes">
+                            <!-- Adjusted object-position to top/center to show machine fully -->
+                            <img src="/garaje.jpg" alt="Limpieza de Garajes" style="object-position: top;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Garajes</h3>
@@ -43,7 +46,8 @@ import Layout from '../layouts/Layout.astro';
 
                     <div class="service-card">
                         <div class="service-card__image">
-                            <img src="/grandes-superficies-final.png" alt="Grandes Superficies">
+                             <!-- Adjusted object-position to top -->
+                            <img src="/grandes-superficies-final.png" alt="Grandes Superficies" style="object-position: top;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Oficinas y Naves</h3>
@@ -54,7 +58,8 @@ import Layout from '../layouts/Layout.astro';
 
                     <div class="service-card">
                         <div class="service-card__image">
-                            <img src="/cristales-detalle.jpg" alt="Limpieza de Cristales">
+                             <!-- Adjusted object-position to top -->
+                            <img src="/cristales-detalle.jpg" alt="Limpieza de Cristales" style="object-position: top;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Cristales</h3>
@@ -63,27 +68,49 @@ import Layout from '../layouts/Layout.astro';
                         </div>
                     </div>
 
-                    <div class="service-card">
-                        <div class="service-card__image">
-                            <img src="/fin-obra.png" alt="Limpieza Fin de Obra">
-                        </div>
-                        <div class="service-card__content">
-                            <h3 class="service-card__title">Fin de Obra</h3>
-                            <p class="service-card__desc">Puesta a punto de viviendas y locales tras reformas. Eliminación de polvo y restos de obra.</p>
-                            <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
-                        </div>
-                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Services Separator & Gardening -->
+        <section class="section-padding" style="padding-top: 0;">
+            <div class="container">
+                
+                <!-- Separator Header -->
+                <div class="separator-header" style="margin-bottom: 3rem; border-top: 1px solid #e2e8f0; padding-top: 3rem; text-align: left;">
+                    <span class="section-tag">Complementarios</span>
+                    <h2 class="section-title">Otros Servicios</h2>
+                </div>
+
+                <div class="services__grid">
+                     <!-- Gardening Card - Enhanced -->
                      <div class="service-card">
                         <div class="service-card__image">
-                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines">
+                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines" style="object-position: top;">
                         </div>
                         <div class="service-card__content">
                             <h3 class="service-card__title">Jardinería</h3>
-                            <p class="service-card__desc">Mantenimiento básico de zonas verdes y exteriores en comunidades y urbanizaciones.</p>
+                            <p class="service-card__desc">Servicio profesional de jardinería para el mantenimiento de zonas verdes.</p>
+                            
+                            <!-- Detailed list as requested -->
+                            <ul style="list-style: none; padding: 0; margin: 1rem 0; color: #64748b; font-size: 0.95rem;">
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Poda y desbroce
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Mantenimiento de riego
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Control de plagas
+                                </li>
+                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Diseño de jardines
+                                </li>
+                            </ul>
+
                             <a href="/contacto" class="link-arrow">Solicitar Presupuesto <span>→</span></a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
