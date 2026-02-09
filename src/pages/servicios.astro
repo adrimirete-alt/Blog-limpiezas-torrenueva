@@ -20,9 +20,9 @@ import Layout from '../layouts/Layout.astro';
             <div class="container">
                 
                 <!-- NEW: Local SEO Intro Text -->
-                <div class="seo-intro" style="text-align: center; max-width: 800px; margin: 0 auto 4rem auto;">
-                    <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: #1e293b;">Empresa de Limpieza en Torrevieja</h2>
-                    <p style="color: #64748b; font-size: 1.15rem; line-height: 1.6;">
+                <div class="seo-intro" style="text-align: center; max-width: 1000px; margin: 0 auto 4rem auto;">
+                    <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; color: #1e293b;">Empresa de Limpieza en Torrevieja</h2>
+                    <p style="color: #64748b; font-size: 1.2rem; line-height: 1.8; text-align: justify; text-align-last: center;">
                         Somos referente en servicios de limpieza profesional en <strong>Torrevieja, Orihuela Costa y toda la Vega Baja</strong>. 
                         Ofrecemos soluciones integrales de higiene y mantenimiento para comunidades, garajes y empresas, garantizando resultados impecables con maquinaria de última tecnología.
                     </p>
@@ -83,56 +83,77 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </section>
 
-        <!-- Other Services Separator & Gardening -->
-        <section class="section-padding" style="padding-top: 0;">
-            <div class="container">
-                
-                <!-- Separator Header -->
-                <div class="separator-header" style="margin-bottom: 3rem; border-top: 1px solid #e2e8f0; padding-top: 3rem; text-align: left;">
-                    <span class="section-tag">Complementarios</span>
-                    <h2 class="section-title">Otros Servicios</h2>
-                </div>
-
-                <!-- Custom Grid for Horizontal Layout -->
-                <div class="services__grid">
-                     <!-- Gardening Card - Horizontal Layout -->
-                     <div class="service-card service-card--horizontal">
-                        
-                        <!-- Columna Izquierda: Contenido -->
-                        <div class="service-card__content">
-                            <h3 class="service-card__title">Jardinería</h3>
-                            <!-- Expanded SEO text to fill space -->
-                            <p class="service-card__desc">
-                                Servicio profesional de jardinería para el mantenimiento de zonas verdes. 
-                                Ofrecemos soluciones integrales para el cuidado de sus espacios verdes. Nuestro equipo de jardineros expertos se encarga de mantener la salud y belleza de su jardín durante todo el año, utilizando técnicas sostenibles y maquinaria de última generación. Transformamos su entorno exterior en un oasis de tranquilidad.
-                            </p>
-                            
-                            <ul style="list-style: none; padding: 0; margin: 1rem 0; color: #64748b; font-size: 0.95rem;">
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Poda y desbroce
-                                </li>
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Control de plagas
-                                </li>
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Poda de palmeras
-                                </li>
-                                <li style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                                    <span style="color: var(--color-primary); font-weight: bold;">✓</span> Mantenimiento de jardines
-                                </li>
-                            </ul>
-
-                            <a href="/contacto" class="button button--primary button--full-width">Solicitar Presupuesto</a>
-                        </div>
-
-                        <!-- Columna Derecha: Imagen -->
-                        <div class="service-card__image horizontal-image">
-                            <img src="/jardineros-detalle.jpg" alt="Mantenimiento Jardines">
-                        </div>
-
-                    </div>
-                </div>
+        <!-- Other Services Section (New Grid) -->
+        <section class="otros-servicios-section">
+          <div class="container">
+            <div class="section-header">
+              <span class="section-tag">Complementarios</span>
+              <h2>OTROS SERVICIOS</h2>
+              <p>Servicios adicionales profesionales para un mantenimiento integral</p>
             </div>
+
+            <div class="servicios-grid-custom">
+              <!-- REFORMAS -->
+              <div class="servicio-card">
+                <div class="service-image-container">
+                  <img src="/servicio-reformas-albanil.png" alt="Reformas y Albañilería" class="service-card-img">
+                </div>
+                <h3>REFORMAS</h3>
+                <ul class="features-list">
+                  <li>✓ Planificación de reformas</li>
+                  <li>✓ Trabajos de albañilería</li>
+                  <li>✓ Instalación de acabados</li>
+                  <li>✓ Coordinación de oficios</li>
+                </ul>
+                <a href="/contacto" class="btn-presupuesto">Solicitar Presupuesto</a>
+              </div>
+
+              <!-- ELECTRICIDAD -->
+              <div class="servicio-card">
+                <div class="service-image-container">
+                  <img src="/servicio-electricidad-electricista.jpg" alt="Electricista Profesional" class="service-card-img">
+                </div>
+                <h3>ELECTRICIDAD</h3>
+                <ul class="features-list">
+                  <li>✓ Instalaciones eléctricas</li>
+                  <li>✓ Reparación de averías</li>
+                  <li>✓ Actualización de sistemas</li>
+                  <li>✓ Iluminación LED</li>
+                </ul>
+                <a href="/contacto" class="btn-presupuesto">Solicitar Presupuesto</a>
+              </div>
+
+              <!-- FONTANERÍA -->
+              <div class="servicio-card">
+                <div class="service-image-container">
+                  <img src="/servicio-fontaneria-fontanero.jpg" alt="Fontanero Profesional" class="service-card-img">
+                </div>
+                <h3>FONTANERÍA</h3>
+                <ul class="features-list">
+                  <li>✓ Instalación de tuberías</li>
+                  <li>✓ Reparación de fugas</li>
+                  <li>✓ Cambio de grifería</li>
+                  <li>✓ Mantenimiento preventivo</li>
+                </ul>
+                <a href="/contacto" class="btn-presupuesto">Solicitar Presupuesto</a>
+              </div>
+
+              <!-- PINTURA -->
+              <div class="servicio-card">
+                <div class="service-image-container">
+                  <img src="/servicio-pintura-pintor.png" alt="Pintor Profesional" class="service-card-img">
+                </div>
+                <h3>PINTURA</h3>
+                <ul class="features-list">
+                  <li>✓ Pintura interior</li>
+                  <li>✓ Pintura exterior</li>
+                  <li>✓ Acabados especiales</li>
+                  <li>✓ Pintura industrial</li>
+                </ul>
+                <a href="/contacto" class="btn-presupuesto">Solicitar Presupuesto</a>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- CTA Section -->
@@ -148,43 +169,140 @@ import Layout from '../layouts/Layout.astro';
     </main>
 
     <style>
-        /* Estilos específicos para la tarjeta horizontal de Jardinería */
-        .service-card--horizontal {
-            grid-column: 1 / -1; /* Ocupa todo el ancho */
-            display: flex;
-            flex-direction: column;
+        .otros-servicios-section {
+          background-color: #f8f9fa;
+          padding: 60px 0;
+          border-top: 1px solid #e0e0e0;
         }
 
-        .service-card--horizontal .horizontal-image {
-            height: 300px;
+        .section-header {
+          text-align: center;
+          margin-bottom: 50px;
         }
 
-        .service-card--horizontal img {
+        .section-header h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          margin-bottom: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+        }
+
+        .section-header p {
+          font-size: 1.1rem;
+          color: #64748b;
+        }
+
+        .servicios-grid-custom {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .servicio-card {
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .servicio-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image-container {
+            width: 100%;
+            height: 220px; /* Fixed height for image area */
+            overflow: hidden;
+            /* Border removed as requested */
+        }
+        
+        .service-card-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover !important; /* Forces image to cover the area without whitespace */
             object-position: center;
+            transition: transform 0.5s ease;
         }
 
-        @media (min-width: 900px) {
-            .service-card--horizontal {
-                flex-direction: row;
-                align-items: stretch; /* Misma altura */
-            }
+        .servicio-card:hover .service-card-img {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
 
-            .service-card--horizontal .service-card__content {
-                flex: 0 0 40%; /* 40% ancho para texto */
-                padding: 3rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
+        .servicio-card h3 {
+          padding: 25px 20px 15px 20px; /* Increased top padding for separation */
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          text-transform: uppercase;
+          border-bottom: 2px solid #e2e8f0;
+          margin-bottom: 0;
+        }
 
-            .service-card--horizontal .horizontal-image {
-                flex: 0 0 60%; /* 60% ancho para imagen */
-                height: auto; /* Altura automática basada en el contenido del texto o min-height */
-                min-height: 400px; /* Altura mínima para asegurar que se vea bien */
-            }
+        .features-list {
+          padding: 15px 20px;
+          list-style: none;
+          margin: 0;
+        }
+
+        .features-list li {
+          padding: 8px 0;
+          color: #333;
+          font-size: 0.95rem;
+        }
+
+        .servicio-card img {
+            /* Fallback for other images if any */
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .btn-presupuesto {
+          background-color: #0F172A; /* Dark Blue matching 'Ver Especificaciones' */
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin: auto 20px 20px 20px;
+          text-align: center;
+          text-decoration: none;
+          display: block;
+        }
+
+        .btn-presupuesto:hover {
+          background-color: #334155; /* Lighter dark blue on hover */
+        }
+
+        @media (max-width: 768px) {
+          .servicios-grid-custom {
+            grid-template-columns: 1fr;
+          }
+
+          .section-header h2 {
+            font-size: 1.8rem;
+          }
         }
     </style>
 </Layout>

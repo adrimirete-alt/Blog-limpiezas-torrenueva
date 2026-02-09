@@ -1,5 +1,24 @@
 ---
+
 import Layout from '../layouts/Layout.astro';
+import { supabase } from '../lib/supabase';
+
+let posts = [];
+try {
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+    
+    if (error) {
+        console.error('Error fetching posts:', error);
+    } else {
+        posts = data;
+    }
+} catch (e) {
+    console.error('Supabase connection failed:', e);
+}
+
 ---
 <Layout title="Blog | Limpiezas Torrenueva">
     <main>
@@ -19,46 +38,23 @@ import Layout from '../layouts/Layout.astro';
         <section class="section-padding">
             <div class="container">
                 <div class="services__grid"> <!-- Reusing services grid for blog layout consistency -->
-
-                    <article class="service-card">
-                        <div class="service-card__image">
-                            <img src="/blog-garajes.png" alt="Blog Post 1">
-                        </div>
-                        <div class="service-card__content">
-                            <span class="section-tag">Consejos</span>
-                            <h3 class="service-card__title">Cómo mantener el brillo en los suelos de garaje</h3>
-                            <p class="service-card__desc">Descubre los secretos para que el pavimento de tu garaje luzca
-                                como profesional día tras día.</p>
-                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
-                        </div>
-                    </article>
-
-                    <article class="service-card">
-                        <div class="service-card__image">
-                            <img src="/blog-comunidades.png" alt="Blog Post 2">
-                        </div>
-                        <div class="service-card__content">
-                            <span class="section-tag">Comunidades</span>
-                            <h3 class="service-card__title">La importancia de la limpieza en comunidades</h3>
-                            <p class="service-card__desc">Un entorno limpio mejora la convivencia y revaloriza la
-                                propiedad. Aquí te explicamos por qué.</p>
-                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
-                        </div>
-                    </article>
-
-                    <article class="service-card">
-                        <div class="service-card__image">
-                            <img src="/blog-maquinaria.png" alt="Blog Post 3">
-                        </div>
-                        <div class="service-card__content">
-                            <span class="section-tag">Novedades</span>
-                            <h3 class="service-card__title">Nueva maquinaria para grandes superficies</h3>
-                            <p class="service-card__desc">Incorporamos nuevas fregadoras industriales para ofrecer un
-                                servicio aún más rápido y eficiente.</p>
-                            <a href="#" class="link-arrow">Leer más <span>→</span></a>
-                        </div>
-                    </article>
-
+                    {posts && posts.length > 0 ? (
+                        posts.map((post) => (
+                            <article class="service-card">
+                                <div class="service-card__image">
+                                    <img src={post.image_url || '/blog-placeholder.jpg'} alt={post.title} style="width: 100%; height: 200px; object-fit: cover;">
+                                </div>
+                                <div class="service-card__content">
+                                    <span class="section-tag">{post.tag || 'General'}</span>
+                                    <h3 class="service-card__title">{post.title}</h3>
+                                    <p class="service-card__desc">{post.description}</p>
+                                    <a href={`/post/${post.slug}`} class="link-arrow">Leer más <span>→</span></a>
+                                </div>
+                            </article>
+                        ))
+                    ) : (
+                        <p style="grid-column: 1 / -1; text-align: center; color: #64748b;">No hay artículos publicados todavía.</p>
+                    )}
                 </div>
             </div>
         </section>

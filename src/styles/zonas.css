@@ -1,0 +1,155 @@
+/* CARDS WITH ARROWS STYLES */
+.proceso-section {
+    background: #f8f9fa;
+    padding: 60px 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.proceso-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a3a52;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.proceso-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: nowrap;
+    /* Force single line on desktop */
+    overflow-x: auto;
+    /* Allow scroll on very small screens if needed, but media queries should handle it */
+}
+
+.proceso-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    /* Reduced padding */
+    flex: 1;
+    /* Distribute space evenly */
+    min-width: 0;
+    /* Allow shrinking */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.proceso-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-number {
+    font-size: 2.5rem;
+    /* Reduced size */
+    font-weight: bold;
+    color: #4a90e2;
+    margin-bottom: 5px;
+}
+
+.card-icon {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.card-icon img {
+    width: 40px;
+    /* Small image size */
+    height: 40px;
+    object-fit: contain;
+}
+
+.proceso-card h3 {
+    font-size: 1rem;
+    /* Reduced size */
+    color: #1a3a52;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.proceso-card p {
+    font-size: 0.85rem;
+    /* Reduced size */
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.arrow {
+    font-size: 2rem;
+    color: #4a90e2;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+    flex-shrink: 0;
+    /* Prevent arrow from shrinking */
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .proceso-cards {
+        flex-wrap: wrap;
+        /* Wrap on tablets */
+        justify-content: center;
+    }
+
+    .proceso-card {
+        flex: 0 0 45%;
+        /* 2 per row */
+        margin-bottom: 10px;
+    }
+
+    .arrow {
+        width: 100%;
+        text-align: center;
+        transform: rotate(90deg);
+        margin: 10px 0;
+        display: block;
+    }
+
+    /* Order adjustment for tablet: 
+       Card 1, Arrow, Card 2 
+       Arrow 
+       Card 3, Arrow, Card 4
+       
+       Flex auto-flow doesn't easily do this zig-zag with 100% width separators. 
+       If I make arrows 100% width, they break the line. 
+       Let's trust the user's provided CSS logic but ensure it wraps correctly. 
+       With wrap, if arrow is 100%, it forces a new line.
+    */
+}
+
+@media (max-width: 768px) {
+    .proceso-card {
+        flex: 0 0 100%;
+        /* 1 per row */
+        max-width: 400px;
+        margin-bottom: 0;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+}

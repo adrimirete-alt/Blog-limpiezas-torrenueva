@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/zonas.css';
 ---
 <Layout title="Zonas de Actuación | Limpiezas Torrenueva">
     <main>
@@ -22,10 +23,10 @@ import Layout from '../layouts/Layout.astro';
                     
                     <!-- Left Column: Content Cards -->
                     <div class="zones-content">
-                        <div class="section-header">
+                        <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
                             <span class="section-tag">Cobertura</span>
-                            <h2 class="section-title">Nuestra Zona de Acción</h2>
-                            <p class="text-body">Llegamos allí donde nos necesite. Nuestra logística nos permite cubrir eficazmente toda la zona costera y el interior de la Vega Baja.</p>
+                            <h2 class="section-title" style="font-size: clamp(1.9rem, 4.75vw, 3.3rem); white-space: nowrap;">Nuestra Zona de Acción</h2>
+                            <p class="text-body" style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto;">Llegamos allí donde nos necesite. Nuestra logística nos permite cubrir eficazmente toda la zona costera y el interior de la Vega Baja.</p>
                         </div>
 
                         <!-- Card 1 -->
@@ -56,8 +57,8 @@ import Layout from '../layouts/Layout.astro';
 
                     <!-- Right Column: Sticky Map -->
                     <div class="zones-map-wrapper" style="position: sticky; top: 100px;">
-                        <img src="/mapa-torrevieja.png" alt="Mapa de Cobertura" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
-                        <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: #64748b;">
+                        <img src="/mapa-torrevieja.png" alt="Mapa de Cobertura" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transform: scale(1.1); transform-origin: top center; margin-bottom: 20px;">
+                        <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #64748b;">
                             * Mapa orientativo de nuestra zona principal de actuación.
                         </div>
                     </div>
@@ -67,52 +68,90 @@ import Layout from '../layouts/Layout.astro';
         </section>
 
         <!-- Process Section -->
-        <section class="section-padding bg-dark text-white">
-            <div class="container center-text">
-                <span class="section-tag" style="background: rgba(255,255,255,0.1); color: white;">Proceso</span>
-                <h2 class="section-title">¿Cómo trabajamos?</h2>
-                <div class="grid grid--4-cols" style="margin-top: 4rem; gap: 2rem;">
-                    
-                    <div class="process-step">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📞</div>
-                        <h3 style="margin-bottom: 1rem;">Contacto</h3>
-                        <p style="opacity: 0.8;">Llámenos o escríbanos. Atendemos su solicitud rápidamente.</p>
-                    </div>
-
-                    <div class="process-step">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">👁️</div>
-                        <h3 style="margin-bottom: 1rem;">Visita</h3>
-                        <p style="opacity: 0.8;">Visitamos las instalaciones para valorar el trabajo in situ.</p>
-                    </div>
-
-                    <div class="process-step">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
-                        <h3 style="margin-bottom: 1rem;">Presupuesto</h3>
-                        <p style="opacity: 0.8;">Le entregamos un presupuesto detallado y sin compromiso.</p>
-                    </div>
-
-                    <div class="process-step">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
-                        <h3 style="margin-bottom: 1rem;">Ejecución</h3>
-                        <p style="opacity: 0.8;">Comenzamos el servicio en la fecha y hora acordadas.</p>
-                    </div>
-
+<!-- TARJETAS CON FLECHAS PROCESO - VERSAR LINEAL -->
+        <section class="proceso-section">
+          <div class="container">
+            <h2 class="proceso-title">PROCESO</h2>
+            
+            <div class="proceso-cards">
+              <!-- Tarjeta 1 -->
+              <div class="proceso-card">
+                <div class="card-number">1</div>
+                <div class="card-icon">
+                    <img src="/icons/phone.svg" alt="Contacto">
                 </div>
+                <h3>Llámenos o Escríbanos</h3>
+                <p>Atendemos su solicitud rápidamente.</p>
+              </div>
+              
+              <!-- Flecha -->
+              <div class="arrow">→</div>
+              
+              <!-- Tarjeta 2 -->
+              <div class="proceso-card">
+                <div class="card-number">2</div>
+                <div class="card-icon">
+                    <img src="/icons/eye.svg" alt="Visita">
+                </div>
+                <h3>Visitamos las Instalaciones</h3>
+                <p>Visitamos las instalaciones para valorar el trabajo in situ.</p>
+              </div>
+              
+              <!-- Flecha -->
+              <div class="arrow">→</div>
+              
+              <!-- Tarjeta 3 -->
+              <div class="proceso-card">
+                <div class="card-number">3</div>
+                <div class="card-icon">
+                    <img src="/icons/clipboard.svg" alt="Presupuesto">
+                </div>
+                <h3>Presupuesto Detallado</h3>
+                <p>Le entregamos un presupuesto detallado y sin compromiso.</p>
+              </div>
+              
+              <!-- Flecha -->
+              <div class="arrow">→</div>
+              
+              <!-- Tarjeta 4 -->
+              <div class="proceso-card">
+                <div class="card-number">4</div>
+                <div class="card-icon">
+                    <img src="/icons/star.svg" alt="Inicio">
+                </div>
+                <h3>Comenzamos el Servicio</h3>
+                <p>Comenzamos el servicio en la fecha y hora acordadas.</p>
+              </div>
             </div>
+          </div>
         </section>
 
         <!-- CTA Blue Section -->
         <section class="section-padding bg-primary text-white">
             <div class="container">
                 <div class="cta-blue-content-wrapper" style="display: flex; align-items: center; justify-content: space-between; gap: 4rem;">
-                    <div class="cta-blue-text" style="flex: 1;">
-                        <h2 class="cta-blue-title" style="font-size: 2.5rem; margin-bottom: 1.5rem;">Su confianza, nuestro mayor éxito</h2>
-                        <p class="cta-blue-subtitle" style="font-size: 1.25rem; opacity: 0.9;">Garantizamos resultados profesionales o volvemos a repasar el trabajo sin coste adicional.</p>
-                        <a href="/contacto" class="button button--white">Contactar Ahora</a>
+                    
+                    <!-- Text Side (Smaller now) -->
+                    <div class="cta-blue-text" style="flex: 1; background-color: #F0F9FF; padding: 3rem; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); max-width: 45%;">
+                        <h2 class="cta-blue-title" style="font-size: 2rem; margin-bottom: 1.5rem; color: #1e293b; line-height: 1.2;">SU CONFIANZA, NUESTRO ÉXITO</h2>
+                        <p class="cta-blue-subtitle" style="font-size: 1.1rem; opacity: 0.9; color: #475569; margin-bottom: 2rem; line-height: 1.6;">
+                            Garantizamos una limpieza profesional de máxima calidad. Si el resultado no cumple con sus expectativas, nos comprometemos a repasar el trabajo inmediatamente sin ningún coste adicional para usted.
+                        </p>
+                        
+                        <!-- Linea SEO -->
+                        <div style="margin-bottom: 2rem; padding-left: 1rem; border-left: 4px solid #3b82f6; color: #0f172a; font-weight: 600; font-size: 1rem; line-height: 1.5;">
+                            Somos la empresa líder y de confianza para servicios de limpieza integral en Torrevieja, Orihuela Costa y toda la comarca de la Vega Baja.
+                        </div>
+
+                        <a href="/contacto" class="button button--primary" style="background-color: #1d4ed8; color: white;">Contactar Ahora</a>
                     </div>
-                    <div class="cta-blue-image" style="flex: 0 0 300px;">
-                        <!-- Using the thumbs up cleaner image -->
-                        <img src="/cleaner_thumbs_up.png" alt="Limpiador profesional" style="border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); object-fit: cover; object-position: top center;">
+                    
+                    <!-- Image Side (Larger) -->
+                    <div class="cta-blue-image" style="flex: 1.3; position: relative;">
+                        <!-- Image Container -->
+                        <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                            <img src="/cleaner_thumbs_up.png" alt="Limpiador profesional" style="width: 100%; height: auto; display: block;">
+                        </div>
                     </div>
                 </div>
             </div>

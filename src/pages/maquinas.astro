@@ -1,99 +1,306 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/maquinas.css';
 ---
+
 <Layout title="Maquinaria | Limpiezas Torrenueva">
     <main>
-        <section class="machines-hero">
-            <div class="container">
-                <div class="machines-hero__content">
-                    <h1 class="machines-hero__title">MAQUINARIA INDUSTRIAL <br><span style="color:white">PROFESIONAL</span></h1>
-                    <p class="machines-hero__desc">Venta, alquiler y servicio técnico oficial. La mejor tecnología para la limpieza de grandes superficies.</p>
+        <!-- Hero Section -->
+        <section class="hero-machines">
+        <section class="hero-machines">
+            <div class="container hero-machines__container">
+                <div class="hero-machines__content">
+                    <h1 class="hero-machines__title">MÁQUINAS LIMPIADORAS<br>PROFESIONALES</h1>
+                    <p class="hero-machines__desc">
+                        Fregadoras de alta calidad para compra o alquiler. Soluciones profesionales para limpieza
+                        de grandes superficies, garajes, comunidades y espacios comerciales.
+                    </p>
                     <a href="#catalogo" class="button button--white">Ver Catálogo</a>
                 </div>
-                <div class="machines-hero__image-wrapper">
-                    <img src="/maquinas-hero-final.png" alt="Maquinaria Limpiezas Torrenueva">
+                <div class="hero-machines__image">
+                    <img src="/maquinas-hero-fleet.jpg" alt="Flota de máquinas de limpieza profesional" />
+                </div>
+            </div>
+            
+            <!-- Features overlapping or below hero content -->
+            <div class="hero-features">
+                <div class="container hero-features__grid">
+                    <div class="hero-feature">
+                        <div class="hero-feature__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="hero-feature__title text-white-pop">COMPRA FLEXIBLE</h3>
+                        <p class="hero-feature__desc text-light-silver">Precios competitivos con opciones de financiación disponibles</p>
+                    </div>
+                    
+                    <div class="hero-feature">
+                        <div class="hero-feature__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="hero-feature__title text-white-pop">ALQUILER MENSUAL</h3>
+                        <p class="hero-feature__desc text-light-silver">Alquila por días, semanas o meses sin compromiso a largo plazo</p>
+                    </div>
+
+                    <div class="hero-feature">
+                        <div class="hero-feature__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                            </svg>
+                        </div>
+                        <h3 class="hero-feature__title text-white-pop">GARANTÍA PROFESIONAL</h3>
+                        <p class="hero-feature__desc text-light-silver">Mantenimiento incluido y soporte técnico 24/7</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Fleet Image Section (Requested) -->
-        <section class="section-padding" style="padding-bottom: 0;">
+        <!-- Product Catalog -->
+        <!-- MÁQUINAS CATALOGO NUEVO -->
+        <section id="catalogo" class="maquinas-section">
             <div class="container">
-                <div class="center-text">
-                     <h2 class="section-title">Nuestra Flota de Maquinaria</h2>
-                     <p class="text-body" style="margin: 0 auto 2rem;">Disponemos de una amplia gama de fregadoras y barredoras listas para cualquier intervención.</p>
+                <!-- Header -->
+                <div class="maquinas-header">
+                    <h2>MÁQUINAS LIMPIADORAS PROFESIONALES</h2>
+                    <p>Equipos de última generación disponibles para alquiler o compra</p>
+                    <span class="maquinas-subtitle-small">Descubre nuestra amplia gama de máquinas especializadas para cada tipo de limpieza</span>
                 </div>
-                <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                    <img src="/maquinas-hero-final.png" alt="Flota de Maquinas Limpiezas Torrenueva" style="width: 100%; height: auto; display: block;">
+
+                <!-- GRID 2x2 (Máquinas Principales) -->
+                <div class="maquinas-grid">
+                    <!-- 1. Fregadora Operario -->
+                    <div class="maquina-card">
+                        <img src="/fregadora-operario-bordo.png" alt="Fregadora Operario a Bordo">
+                        <h3>Fregadora Operario a Bordo</h3>
+                        <div class="specs">
+                            <span>⚡ Potencia: 2.5 kW</span>
+                            <span>💧 Capacidad: 50L</span>
+                            <span>🚀 Velocidad: 120 m²/h</span>
+                        </div>
+                        <div class="precios-container">
+                            <p class="precio-alquiler">Alquiler: €45/día</p>
+                            <p class="precio-venta">Venta: €3.500</p>
+                        </div>
+                        <a href="/contacto" class="btn-detalles">Ver detalles</a>
+                    </div>
+                    
+                    <!-- 2. Fregadora Manual -->
+                    <div class="maquina-card">
+                        <img src="/fregadora-manual.png" alt="Fregadora de Empuje Manual">
+                        <h3>Fregadora de Empuje Manual</h3>
+                        <div class="specs">
+                            <span>⚡ Potencia: 1.5 kW</span>
+                            <span>💧 Capacidad: 30L</span>
+                            <span>🚀 Velocidad: 80 m²/h</span>
+                        </div>
+                        <div class="precios-container">
+                            <p class="precio-alquiler">Alquiler: €25/día</p>
+                            <p class="precio-venta">Venta: €1.800</p>
+                        </div>
+                        <a href="/contacto" class="btn-detalles">Ver detalles</a>
+                    </div>
+
+                    <!-- 3. Barredora Industrial -->
+                    <div class="maquina-card">
+                        <img src="/barredora-industrial.png" alt="Barredora Industrial">
+                        <h3>Barredora Industrial</h3>
+                        <div class="specs">
+                            <span>⚡ Potencia: 3 kW</span>
+                            <span>📏 Ancho: 1.2m</span>
+                            <span>🚀 Velocidad: 150 m²/h</span>
+                        </div>
+                        <div class="precios-container">
+                            <p class="precio-alquiler">Alquiler: €35/día</p>
+                            <p class="precio-venta">Venta: €2.800</p>
+                        </div>
+                        <a href="/contacto" class="btn-detalles">Ver detalles</a>
+                    </div>
+
+                    <!-- 4. Limpiador a Vapor -->
+                    <div class="maquina-card">
+                        <img src="/limpiador-vapor.png" alt="Limpiador a Vapor">
+                        <h3>Limpiador a Vapor</h3>
+                        <div class="specs">
+                            <span>⚡ Potencia: 2 kW</span>
+                            <span>💨 Presión: 8 bar</span>
+                            <span>🌡️ Temp: 160°C</span>
+                        </div>
+                        <div class="precios-container">
+                            <p class="precio-alquiler">Alquiler: €30/día</p>
+                            <p class="precio-venta">Venta: €2.200</p>
+                        </div>
+                        <a href="/contacto" class="btn-detalles">Ver detalles</a>
+                    </div>
+                </div>
+
+                <!-- CARRUSEL (Máquinas Adicionales) -->
+                <div class="carrusel-section">
+                    <h3>Más máquinas disponibles</h3>
+                    <div class="carrusel">
+                        <button class="carrusel-btn prev" id="prevBtn">&lt;</button>
+                        <div class="carrusel-container" id="carruselContainer">
+                            <!-- 5. Aspiradora Industrial -->
+                            <div class="carrusel-card">
+                                <img src="/aspiradora-industrial.png" alt="Aspiradora Industrial">
+                                <h4>Aspiradora Industrial</h4>
+                                <p class="spec-main">Alta Succión</p>
+                                <p class="precio-small">€20/día</p>
+                                <a href="/contacto" class="btn-small">Ver más</a>
+                            </div>
+
+                            <!-- 6. Pulidor de Suelos -->
+                            <div class="carrusel-card">
+                                <img src="/pulidor-suelos.png" alt="Pulidor de Suelos">
+                                <h4>Pulidor de Suelos</h4>
+                                <p class="spec-main">Rotativa</p>
+                                <p class="precio-small">€40/día</p>
+                                <a href="/contacto" class="btn-small">Ver más</a>
+                            </div>
+
+                            <!-- 7. Limpiador de Cristales -->
+                            <div class="carrusel-card">
+                                <img src="/limpiador-cristales.png" alt="Limpiador de Cristales">
+                                <h4>Limpiador de Cristales</h4>
+                                <p class="spec-main">Kit Pro</p>
+                                <p class="precio-small">€15/día</p>
+                                <a href="/contacto" class="btn-small">Ver más</a>
+                            </div>
+
+                            <!-- 8. Máquina de Limpieza en Seco -->
+                            <div class="carrusel-card">
+                                <img src="/limpieza-seco.png" alt="Máquina Limpieza Seco">
+                                <h4>Limpieza en Seco</h4>
+                                <p class="spec-main">Alfombras</p>
+                                <p class="precio-small">€50/día</p>
+                                <a href="/contacto" class="btn-small">Ver más</a>
+                            </div>
+
+                            <!-- 9. Encerador Automático -->
+                            <div class="carrusel-card">
+                                <img src="/encerador-automatico.png" alt="Encerador Automático">
+                                <h4>Encerador Auto</h4>
+                                <p class="spec-main">Acabado Brillo</p>
+                                <p class="precio-small">€35/día</p>
+                                <a href="/contacto" class="btn-small">Ver más</a>
+                            </div>
+                        </div>
+                        <button class="carrusel-btn next" id="nextBtn">&gt;</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Catalog -->
-        <section id="catalogo" class="catalog-section">
-            <div class="container">
-                <div class="catalog-header center-text">
-                    <span class="section-tag">Catálogo</span>
-                    <h2 class="catalog-title">Modelos Disponibles</h2>
+        <!-- SECCIÓN DE EXPERTOS MEJORADA -->
+        <section class="seccion-expertos">
+            <div class="container-expertos">
+                <div class="seccion-header-expertos">
+                    <h2>NUESTROS EXPERTOS PUEDEN AYUDARTE</h2>
+                    <p>Nuestros expertos pueden ayudarte a elegir la máquina perfecta para tus necesidades</p>
                 </div>
 
-                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <!-- Product 1 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="/fregadora-conductor-final.png" alt="Fregadora Conductor" class="product-img">
-                        </div>
-                        <div class="product-content">
-                            <span class="product-badge">Premium</span>
-                            <h3 class="product-title">Fregadora Conductor Sentado T7</h3>
-                            <p class="product-desc">Ideal para garajes de más de 2000m². Gran autonomía y ancho de trabajo de 85cm.</p>
-                            <div class="price-box">
-                                <div class="price-row">
-                                    <div class="price-col">
-                                        <span class="price-label">Precio</span>
-                                        <span class="price-amount">Consultar</span>
-                                    </div>
-                                    <div class="price-col" style="text-align: right;">
-                                        <span class="price-label">Disponibilidad</span>
-                                        <span style="color: #10b981; font-weight:700;">En Stock</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-actions">
-                                <a href="/contacto" class="btn-product-dark">Solicitar Info</a>
-                            </div>
-                        </div>
+                <!-- TARJETAS DE BENEFICIOS -->
+                <div class="beneficios-grid">
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">👤</div>
+                        <h3>Asesoramiento Personalizado</h3>
+                        <p>Nuestro equipo te guiará en la selección correcta</p>
                     </div>
-
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="/fregadora-manual-final.png" alt="Fregadora Manual" class="product-img">
-                        </div>
-                        <div class="product-content">
-                            <span class="product-badge">Estándar</span>
-                            <h3 class="product-title">Fregadora Manual T300</h3>
-                            <p class="product-desc">Compacta y potente. Perfecta para pasillos, supermercados y zonas con obstáculos.</p>
-                            <div class="price-box">
-                                <div class="price-row">
-                                    <div class="price-col">
-                                        <span class="price-label">Precio</span>
-                                        <span class="price-amount">Consultar</span>
-                                    </div>
-                                    <div class="price-col" style="text-align: right;">
-                                        <span class="price-label">Disponibilidad</span>
-                                        <span style="color: #10b981; font-weight:700;">En Stock</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-actions">
-                                <a href="/contacto" class="btn-product-dark">Solicitar Info</a>
-                            </div>
-                        </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">⚙️</div>
+                        <h3>Máquinas de Última Generación</h3>
+                        <p>Equipos modernos y eficientes para tu negocio</p>
                     </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">💰</div>
+                        <h3>Precios Competitivos</h3>
+                        <p>Las mejores tarifas del mercado garantizadas</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon">📞</div>
+                        <h3>Soporte Técnico 24/7</h3>
+                        <p>Asistencia disponible en cualquier momento</p>
+                    </div>
+                </div>
 
+                <!-- BOTONES -->
+                <div class="botones-container-expertos">
+                    <a href="/contacto" class="btn-experto btn-primary-experto">
+                        <span class="btn-icon">📋</span>
+                        Solicitar Presupuesto
+                    </a>
+                    <a href="https://wa.me/34604438618" target="_blank" class="btn-experto btn-secondary-experto">
+                        <span class="btn-icon">💬</span>
+                        Contactar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section class="articles-section">
+            <div class="container">
+                <div class="articles-header">
+                    <h2 class="articles-title">ARTÍCULOS SOBRE MÁQUINAS LIMPIADORAS</h2>
+                    <p class="articles-subtitle">Guías, comparativas y consejos de expertos</p>
+                </div>
+
+                <div class="articles-grid">
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">FREGADORA INDUSTRIAL - GUÍA DE COMPRA</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
+                    
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">BARREDORA INDUSTRIAL - TIPOS Y CARACTERÍSTICAS</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
+                    
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">CÓMO ELEGIR ENTRE COMPRAR VS ALQUILAR</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
+                    
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">MANTENIMIENTO DE FREGADORAS INDUSTRIALES</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
+                    
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">ERRORES COMUNES AL COMPRAR MAQUINARIA</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
+                    
+                    <a href="#" class="article-card">
+                        <h3 class="article-card__title">MAQUINARIA ECOLÓGICA - OPCIONES SOSTENIBLES</h3>
+                        <span class="article-card__link">Leer más &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 </Layout>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('carruselContainer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        if (!container || !prevBtn || !nextBtn) return;
+        
+        // Scroll amount equal to card width + gap
+        const scrollAmount = 305; 
+        
+        nextBtn.addEventListener('click', () => {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    });
+</script>

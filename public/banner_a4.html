@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner Limpiezas Torrenueva</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            width: 210mm;
+            height: 297mm;
+            background-color: #003366;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* -------------------------------------------------------- */
+        /* CÓDIGO ANTI-SOMBRAS / ANTI-SHADOW CODE IMPRESCINDIBLE    */
+        /* -------------------------------------------------------- */
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            filter: none !important;
+            -webkit-filter: none !important;
+        }
+
+        /* Decorative background elements */
+        .bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+            z-index: -1;
+            /* Hide for print safety if needed, but keeping for screen aesthetics if safe */
+        }
+
+        .circle-bg {
+            /* Hiding circle bg to be safe against artifacts */
+            display: none;
+        }
+
+        .main-wrapper {
+            position: relative;
+            width: 210mm;
+            min-height: 297mm;
+            background-color: #003366;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 20px 40px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .logo-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 10px;
+            background-color: white;
+            border-radius: 30px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* box-shadow removed globally */
+            overflow: visible;
+            position: relative;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: none;
+        }
+
+        .company-name {
+            font-size: 50px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin: 5px 0 0;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .content {
+            padding: 0 50px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            justify-content: center;
+        }
+
+        .services-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            z-index: 5;
+            max-width: 60%;
+        }
+
+        .services-list li {
+            font-size: 28px;
+            margin-bottom: 12px;
+            padding-left: 35px;
+            position: relative;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .services-list li::before {
+            content: "•";
+            color: #4facfe;
+            position: absolute;
+            left: 0;
+            font-size: 35px;
+            line-height: 0.8;
+            top: 2px;
+        }
+
+        .new-service {
+            color: #4facfe;
+            font-weight: 800;
+            display: block;
+            margin-top: 15px;
+            width: 65%;
+            line-height: 1.25;
+        }
+
+        .image-container {
+            width: 440px;
+            /* Increased by ~15% (380 -> 440) */
+            height: 440px;
+            position: absolute;
+            bottom: 140px;
+            /* Adjusted slightly */
+            right: -110px;
+            /* Adjusted to prevent text overlap */
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid white;
+            z-index: 2;
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer {
+            padding: 20px 0;
+            background-color: #002244;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid #4facfe;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 160px;
+            margin-top: auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .icon-svg,
+        .phone-icon-svg {
+            width: 40px;
+            height: 40px;
+            fill: #4facfe;
+            flex-shrink: 0;
+            overflow: visible;
+        }
+
+        .phone-icon-svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .phone-display {
+            font-size: 50px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .email-display {
+            font-size: 24px;
+            color: #4facfe;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        @media print {
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                background-color: transparent !important;
+                background-image: none !important;
+            }
+
+            .main-wrapper {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #003366 !important;
+                height: 297mm;
+                width: 210mm;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            /* Ensure text remains white */
+            h1,
+            li,
+            div {
+                color: white !important;
+            }
+
+            .email-display,
+            .icon-svg,
+            .phone-icon-svg,
+            .new-service,
+            .services-list li::before {
+                fill: #4facfe !important;
+                color: #4facfe !important;
+            }
+
+            .image-container {
+                right: -60px !important;
+                border: 10px solid white !important;
+                box-shadow: none !important;
+            }
+
+            .footer {
+                border-top: 4px solid #4facfe !important;
+                background-color: #002244 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print" style="position: absolute; top: 10px; right: 10px; z-index: 100; text-align: right;">
+        <button onclick="window.print()"
+            style="padding: 10px 20px; font-size: 16px; background: white; border: none; border-radius: 5px; cursor: pointer; border: 1px solid #ccc;">🖨️
+            Imprimir / Guardar como PDF</button>
+        <div
+            style="margin-top: 5px; color: #333; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+            ⚠️ IMPORTANTE: Marca la casilla<br>"Gráficos de fondo" en las opciones de impresión
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        <div class="header">
+            <div class="logo-container">
+                <img src="./logo_shield.png" alt="Logotipo" class="logo-img">
+            </div>
+            <h1 class="company-name">LIMPIEZAS<br>TORRENUEVA</h1>
+        </div>
+
+        <div class="content">
+            <ul class="services-list">
+                <li>Puertos deportivos</li>
+                <li>Centros comerciales</li>
+                <li>Mantenimiento integral de comunidades</li>
+                <li>Grandes superficies</li>
+                <li>Oficinas</li>
+                <li>Garajes</li>
+                <li class="new-service">Venta y Alquiler de Máquinas Fregasuelos Industriales</li>
+            </ul>
+
+            <div class="image-container">
+                <img src="file:///Users/adrianmiretemartinez/.gemini/antigravity/brain/7a6b2d4e-e491-4718-98d4-a4e4484e4dbd/friegasuelos_oficina_1770656321602.png"
+                    alt="Máquina Friegasuelos" class="feature-img">
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-row">
+                    <svg class="phone-icon-svg" width="50" height="50" viewBox="0 0 24 24" style="fill: #4facfe;">
+                        <path fill="#4facfe"
+                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
+                    <div class="phone-display">604 438 618</div>
+                </div>
+                <div class="contact-row">
+                    <svg class="icon-svg" width="40" height="40" viewBox="0 0 24 24" style="fill: #4facfe;">
+                        <path fill="#4facfe"
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    <div class="email-display">info@limpiezastorrenueva.com</div>
+                </div>
+                <div class="contact-row">
+                    <svg class="icon-svg" width="40" height="40" viewBox="0 0 24 24" style="fill: #4facfe;">
+                        <path fill="#4facfe"
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-1.07 3.97-2.9 5.4z" />
+                    </svg>
+                    <div class="email-display">www.Limpiezastorrenueva.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

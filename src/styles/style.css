@@ -232,11 +232,21 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem var(--spacing-container);
-    /* Re-adding padding here */
+    padding: 1rem var(--spacing-container);
+    /* Reduced vertical padding */
     transition: padding 0.3s;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
-    /* Gradient for readability before scroll */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.header .button {
+    padding: 0.5rem 1.2rem;
+    /* Smaller padding */
+    font-size: 0.8rem;
+    /* Smaller font */
+    height: auto;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-left: 1rem;
 }
 
 .header.scrolled .header__container {
@@ -260,7 +270,7 @@ h4 {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    margin-right: 2rem;
+    margin-right: 1rem;
     white-space: nowrap;
     /* Force single line - CRITICAL */
     flex-shrink: 0;
@@ -280,8 +290,8 @@ h4 {
 /* Nav adjustments for more items */
 .nav__list {
     display: flex;
-    gap: 1.25rem;
-    /* Reduced gap to fit more items */
+    gap: 0.85rem;
+    /* Reduced gap to fit more items and prevent overlap */
     list-style: none;
     align-items: center;
 }
@@ -290,13 +300,11 @@ h4 {
     text-decoration: none;
     color: #ffffff;
     font-weight: 600;
-    /* Slightly lighter than 700 to save space visually */
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     /* Smaller font to fit textual items */
     position: relative;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    /* Matching reference image style usually */
     letter-spacing: 0.05em;
     white-space: nowrap;
     /* Prevent wrapping */
@@ -376,8 +384,10 @@ h4 {
     position: relative;
     z-index: 2;
     padding: 0 var(--spacing-container);
-    margin-top: 60px;
-    /* Offset for fixed header visual centering */
+    margin-top: 100px;
+    /* Increased to clear fixed header */
+    padding-top: 40px;
+    /* Extra breathing room */
 }
 
 .page-hero__title {
@@ -2081,4 +2091,64 @@ h4 {
         width: 100%;
         max-width: 400px;
     }
+}
+
+/* FAQ Section Specific Styles */
+.faq-section {
+    background: linear-gradient(135deg, #4a90e2 0%, #1a3a52 100%);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    /* Ensure text directly in section is white if any */
+}
+
+.faq-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 600px;
+    height: 600px;
+    background-image: url('https://private-us-east-1.manuscdn.com/sessionFile/OABTIPnDwc2uswKxww8s0d/sandbox/gsnBDTMcPz9MheH4dt4JdG-img-1_1770077084000_na1fn_Y2hhdC1idWJibGVzLWZhcQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.faq-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* FAQ Section Transparent Cards Override */
+.faq-section .faq-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+
+.faq-section .faq-question {
+    background: transparent;
+    color: white;
+    font-weight: 600;
+}
+
+.faq-section .faq-question:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.faq-section .faq-item[open] .faq-question {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.faq-section .faq-answer {
+    color: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-section .faq-question::after {
+    color: white;
 }
