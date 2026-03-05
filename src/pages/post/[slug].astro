@@ -3,8 +3,13 @@ import Layout from '../../layouts/Layout.astro';
 import { supabase } from '../../lib/supabase';
 
 export async function getStaticPaths() {
-  const { data: posts } = await supabase.from('posts').select('slug');
-  return posts?.map(post => ({ params: { slug: post.slug } })) || [];
+  try {
+    const { data: posts } = await supabase.from('posts').select('slug');
+    return posts?.map(post => ({ params: { slug: post.slug } })) || [];
+  } catch (e) {
+    console.error('Error fetching static paths:', e);
+    return [];
+  }
 }
 
 const { slug } = Astro.params;
