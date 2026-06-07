@@ -10,8 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^8.2.11",
+    "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.95.3",
     "astro": "^5.1.1",
-    "gsap": "^3.12.5"
+    "gsap": "^3.12.5",
+    "sharp": "^0.34.5"
   }
 }

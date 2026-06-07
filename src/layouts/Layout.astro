@@ -1,33 +1,257 @@
 ---
-import '../styles/global.css'; // Import global styles
+export interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    type?: string;
+    noindex?: boolean;
+}
+
+const {
+    title = "Empresas de Limpieza en Torrevieja | Limpiezas Torrenueva",
+    description = "Empresa de limpiezas en Torrevieja y Vega Baja. Especialistas en limpieza de comunidades, garajes, oficinas e industrial. Presupuesto sin compromiso. ☎ +34 604 438 618",
+    image = "/og-image.jpg",
+    type = "website",
+    noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://limpiezastorrenueva.com').toString();
+const ogImageURL = new URL(image, Astro.site || 'https://limpiezastorrenueva.com').toString();
+
+import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empresa de Limpieza en Torrevieja | Limpiezas Torrenueva</title>
-    <meta name="description" content="¿Buscas empresa de limpieza en Torrevieja? Somos especialistas en limpieza en Torrevieja, grandes superficies, comunidades, garajes y alquiler de máquinas limpiadoras en Torrevieja. Limpiadores en Torrevieja con años de experiencia.">
-    <meta name="keywords" content="empresa de limpieza en torrevieja, limpieza en torrevieja, maquinas limpiadoras en torrevieja, empresa de limpieza en grandes superficies en torrevieja, limpiadores en torrevieja, limpiezas torrenueva, torrevieja limpieza">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="keywords" content="empresa de limpieza Torrevieja, limpiezas Torrevieja, limpieza comunidades Torrevieja, limpieza garajes Torrevieja, limpieza oficinas Torrevieja, empresa limpieza Vega Baja, limpieza industrial Torrevieja, Limpiezas Torrenueva">
     <meta name="author" content="Limpiezas Torrenueva">
+    <meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"}>
+    <meta name="googlebot" content={noindex ? "noindex,follow" : "index,follow"}>
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="geo.region" content="ES-VC">
+    <meta name="geo.placename" content="Torrevieja">
+    <meta name="geo.position" content="37.9787;-0.6826">
+    <meta name="ICBM" content="37.9787, -0.6826">
+
+    <link rel="canonical" href={canonicalURL}>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta property="og:type" content={type}>
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Limpiezas Torrenueva">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:image" content={ogImageURL}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Limpiezas Torrenueva - Empresa de Limpiezas en Torrevieja">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImageURL}>
+
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CleaningService",
+        "@id": "https://limpiezastorrenueva.com/#cleaningservice",
+        "name": "Limpiezas Torrenueva",
+        "alternateName": "Empresa de Limpiezas en Torrevieja",
+        "image": "https://limpiezastorrenueva.com/oficina-torrenueva.png",
+        "logo": "https://limpiezastorrenueva.com/logo.png",
+        "url": "https://limpiezastorrenueva.com/",
+        "telephone": "+34604438618",
+        "email": "info@limpiezastorrenueva.com",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Torrevieja",
+            "addressRegion": "Alicante",
+            "postalCode": "03180",
+            "addressCountry": "ES"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 37.9787,
+            "longitude": -0.6826
+        },
+        "areaServed": [
+            { "@type": "City", "name": "Torrevieja" },
+            { "@type": "City", "name": "La Mata" },
+            { "@type": "City", "name": "Orihuela Costa" },
+            { "@type": "City", "name": "Guardamar del Segura" },
+            { "@type": "City", "name": "Pilar de la Horadada" },
+            { "@type": "City", "name": "San Miguel de Salinas" },
+            { "@type": "City", "name": "Los Montesinos" },
+            { "@type": "City", "name": "Rojales" },
+            { "@type": "AdministrativeArea", "name": "Vega Baja del Segura" }
+        ],
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+            "opens": "08:00",
+            "closes": "19:00"
+        },{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "14:00"
+        }],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Limpieza",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpieza de Comunidades" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpieza de Garajes y Parkings" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpieza de Oficinas" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpieza Industrial" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpieza de Edificios" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Venta de Maquinaria de Limpieza" } }
+            ]
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "47",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "description": "Limpiezas Torrenueva es una empresa de limpiezas profesional en Torrevieja con más de 15 años de experiencia. Ofrecemos limpieza de comunidades, garajes, oficinas y limpieza industrial en toda la Vega Baja del Segura."
+    })} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://limpiezastorrenueva.com/#organization",
+        "name": "Limpiezas Torrenueva",
+        "url": "https://limpiezastorrenueva.com",
+        "logo": "https://limpiezastorrenueva.com/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+34604438618",
+            "contactType": "customer service",
+            "areaServed": "ES",
+            "availableLanguage": "Spanish"
+        }
+    })} />
+
+    <slot name="head" />
 </head>
 <body>
     <Header />
-    
+
     <slot />
 
     <Footer />
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/34604438618" class="whatsapp-btn" target="_blank" aria-label="Chat en WhatsApp">
-        <img src="/whatsapp_btn.png" alt="WhatsApp">
+    <a href="https://wa.me/34604438618?text=Hola%2C%20me%20interesa%20pedir%20un%20presupuesto%20de%20limpieza" class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="white">
+            <path d="M16 .395c-8.836 0-16 7.163-16 16 0 2.792.726 5.41 2 7.69L.13 31.605l7.703-2.018A15.92 15.92 0 0 0 16 32.395c8.836 0 16-7.163 16-16s-7.164-16-16-16zm0 29.225c-2.476 0-4.815-.71-6.794-1.937l-.485-.29-5.054 1.325 1.348-4.93-.316-.504a13.222 13.222 0 0 1-2.067-7.114c0-7.317 5.952-13.268 13.268-13.268s13.268 5.95 13.268 13.268c0 7.317-5.952 13.268-13.268 13.268zm7.276-9.937c-.398-.2-2.355-1.162-2.72-1.296-.366-.133-.632-.2-.898.2-.265.398-1.029 1.295-1.262 1.561-.232.266-.465.3-.864.1-.397-.199-1.683-.62-3.205-1.977-1.184-1.055-1.984-2.36-2.218-2.757-.232-.398-.024-.612.175-.81.18-.179.398-.466.598-.7.2-.232.265-.398.398-.664.133-.265.066-.498-.033-.698-.1-.199-.898-2.164-1.231-2.964-.324-.776-.654-.67-.898-.683l-.766-.013c-.265 0-.697.1-1.063.498-.366.398-1.395 1.362-1.395 3.318 0 1.957 1.428 3.848 1.628 4.114.199.265 2.811 4.29 6.808 6.012a23.16 23.16 0 0 0 2.272.84c.954.302 1.823.26 2.51.158.766-.114 2.355-.963 2.687-1.892.332-.929.332-1.726.232-1.892-.099-.166-.365-.265-.764-.465z"/>
+        </svg>
     </a>
 
-    <!-- Imports scripts safely -->
+    <a href="tel:+34604438618" class="mobile-call-btn" aria-label="Llamar ahora a Limpiezas Torrenueva">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+        </svg>
+        <span>Llamar ahora</span>
+    </a>
+
     <script>
       import "../scripts/script.js";
     </script>
 </body>
 </html>
+
+<style is:global>
+    .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        z-index: 998;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 6px 18px rgba(37, 211, 102, 0.55);
+    }
+    .whatsapp-btn svg { width: 30px; height: 30px; }
+    .whatsapp-btn img { display: none; }
+
+    .mobile-call-btn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 90px;
+        background: #3b82f6;
+        color: white;
+        text-decoration: none;
+        padding: 14px 20px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.45);
+        z-index: 998;
+        animation: pulse-call 2s infinite;
+    }
+    .mobile-call-btn:hover { background: #2563eb; }
+
+    @keyframes pulse-call {
+        0%, 100% { box-shadow: 0 4px 12px rgba(59, 130, 246, 0.45); }
+        50% { box-shadow: 0 4px 20px rgba(59, 130, 246, 0.75); }
+    }
+
+    @media (max-width: 768px) {
+        .mobile-call-btn { display: flex; }
+        .whatsapp-btn { width: 52px; height: 52px; }
+        .whatsapp-btn svg { width: 26px; height: 26px; }
+    }
+
+    @media print {
+        .whatsapp-btn, .mobile-call-btn { display: none !important; }
+    }
+
+    *:focus-visible {
+        outline: 3px solid #3b82f6;
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+</style>

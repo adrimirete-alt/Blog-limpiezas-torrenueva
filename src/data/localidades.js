@@ -1,0 +1,132 @@
+export const localidades = [
+    {
+        slug: 'torrevieja',
+        nombre: 'Torrevieja',
+        provincia: 'Alicante',
+        habitantes: '~83.000',
+        geo: { lat: 37.9787, lng: -0.6826 },
+        descripcion_corta: 'Nuestra base de operaciones. Cobertura inmediata en toda la ciudad.',
+        intro: 'Limpiezas Torrenueva tiene su sede en Torrevieja y es donde concentramos el mayor número de servicios. Llevamos más de 15 años limpiando comunidades, garajes, oficinas y locales comerciales en toda la ciudad.',
+        tipos_propiedad: ['Edificios de comunidades (Acequión, Habaneras, La Veleta)', 'Urbanizaciones turísticas y residenciales', 'Garajes y parkings de gran capacidad', 'Locales comerciales y oficinas en el centro', 'Establecimientos hoteleros y de hostelería'],
+        servicios_destacados: ['Limpieza de comunidades de vecinos', 'Mantenimiento integral', 'Limpieza de garajes con fregadora industrial', 'Limpieza de cristales en altura', 'Limpiezas de fin de obra'],
+        barrios: ['El Acequión', 'Los Balcones', 'Playa de los Locos', 'Playa del Cura', 'Punta Prima', 'La Veleta', 'Las Calas', 'San Luis', 'La Siesta', 'Aguas Nuevas', 'Cabo Cervera'],
+        meta_description: 'Empresa de limpiezas en Torrevieja con más de 15 años de experiencia. Limpieza de comunidades, garajes y oficinas. Presupuesto en 24h ☎ 604 438 618',
+        particularidades: 'Conocemos cada barrio de Torrevieja: trabajamos a diario en El Acequión, Los Balcones, Punta Prima, Playa Flamenca, La Veleta y Habaneras. Adaptamos horarios a las altas temporadas turísticas y a las particularidades de cada comunidad.'
+    },
+    {
+        slug: 'la-mata',
+        nombre: 'La Mata',
+        provincia: 'Alicante',
+        habitantes: '~4.500',
+        geo: { lat: 38.0214, lng: -0.6473 },
+        descripcion_corta: 'Servicio especializado en el sector residencial costero.',
+        intro: 'La Mata es una pedanía de Torrevieja con un alto componente residencial y turístico. Nuestro equipo cubre toda la zona con tiempos de respuesta inmediatos al estar a solo 5 km de nuestra base.',
+        tipos_propiedad: ['Urbanizaciones costeras', 'Apartamentos turísticos vacacionales', 'Chalets y viviendas unifamiliares', 'Establecimientos hosteleros junto a la playa'],
+        servicios_destacados: ['Limpieza de urbanizaciones', 'Limpieza tras alquileres turísticos', 'Mantenimiento de zonas comunes', 'Limpieza de cristales y terrazas'],
+        barrios: ['Pueblo de La Mata', 'Lo Crispín', 'Torre La Mata', 'Las Filipinas'],
+        meta_description: 'Empresa de limpieza en La Mata (Torrevieja). Limpieza de urbanizaciones, comunidades y apartamentos turísticos. Presupuesto gratuito ☎ 604 438 618',
+        particularidades: 'En La Mata estamos especializados en limpieza de apartamentos turísticos y check-out exprés para urbanizaciones de alquiler vacacional. Disponibilidad fines de semana en temporada alta.'
+    },
+    {
+        slug: 'orihuela-costa',
+        nombre: 'Orihuela Costa',
+        provincia: 'Alicante',
+        habitantes: '~30.000',
+        geo: { lat: 37.9168, lng: -0.7547 },
+        descripcion_corta: 'Cobertura completa de urbanizaciones costeras y residenciales.',
+        intro: 'Orihuela Costa concentra un enorme volumen de urbanizaciones residenciales y turísticas. Trabajamos con decenas de comunidades de vecinos y administradores de fincas en todas las playas: Campoamor, Cabo Roig, La Zenia, Playa Flamenca y Punta Prima.',
+        tipos_propiedad: ['Urbanizaciones residenciales internacionales', 'Resorts turísticos', 'Centros comerciales (Zenia Boulevard, La Fuente)', 'Apartamentos vacacionales', 'Bungalows en complejos cerrados'],
+        servicios_destacados: ['Limpieza de comunidades grandes (+50 vecinos)', 'Limpieza de piscinas y zonas comunes exteriores', 'Mantenimiento de parkings comunitarios', 'Limpieza tras temporada alta'],
+        barrios: ['Campoamor', 'Cabo Roig', 'La Zenia', 'Playa Flamenca', 'Villamartín', 'Punta Prima', 'Las Filipinas', 'Aguamarina', 'Mil Palmeras'],
+        meta_description: 'Empresa de limpieza en Orihuela Costa: Campoamor, Cabo Roig, La Zenia, Playa Flamenca y Villamartín. Comunidades y garajes. ☎ 604 438 618',
+        particularidades: 'Estamos preparados para los retos específicos de Orihuela Costa: comunidades grandes (más de 100 vecinos), tratos en varios idiomas (inglés, sueco, alemán) y picos de trabajo en verano. Maquinaria propia para parkings de hasta 5.000 m².'
+    },
+    {
+        slug: 'guardamar-del-segura',
+        nombre: 'Guardamar del Segura',
+        provincia: 'Alicante',
+        habitantes: '~16.000',
+        geo: { lat: 38.0871, lng: -0.6533 },
+        descripcion_corta: 'Limpieza profesional para comunidades, parkings y locales en Guardamar.',
+        intro: 'En Guardamar del Segura damos servicio a comunidades del casco urbano y a urbanizaciones residenciales próximas a la playa. Nuestro tiempo de respuesta es inferior a 24h gracias a la cercanía con Torrevieja.',
+        tipos_propiedad: ['Comunidades en casco urbano', 'Urbanizaciones próximas a la playa', 'Locales comerciales en av. Cervantes', 'Restaurantes y chiringuitos'],
+        servicios_destacados: ['Mantenimiento de comunidades', 'Limpieza de oficinas y locales', 'Limpieza de garajes', 'Limpieza tras eventos'],
+        barrios: ['Casco urbano', 'Lomas de la Marquesa', 'Marjal de Guardamar', 'Eden', 'El Raso', 'Las Dunas'],
+        meta_description: 'Empresa de limpieza en Guardamar del Segura. Comunidades, garajes, locales comerciales. Cobertura inmediata desde Torrevieja ☎ 604 438 618',
+        particularidades: 'Cubrimos tanto el centro de Guardamar como las urbanizaciones de El Raso, El Edén y Las Dunas. Adaptamos calendarios a la temporada turística y mantenemos servicios de mantenimiento todo el año.'
+    },
+    {
+        slug: 'pilar-de-la-horadada',
+        nombre: 'Pilar de la Horadada',
+        provincia: 'Alicante',
+        habitantes: '~24.000',
+        geo: { lat: 37.8675, lng: -0.7944 },
+        descripcion_corta: 'Servicio integral en el sur de la Vega Baja.',
+        intro: 'Pilar de la Horadada es uno de los municipios con mayor crecimiento urbanístico de la Vega Baja. Ofrecemos limpieza profesional para comunidades nuevas, urbanizaciones consolidadas y locales comerciales.',
+        tipos_propiedad: ['Nuevas promociones residenciales', 'Urbanizaciones costeras (Mil Palmeras, Torre de la Horadada)', 'Polígonos industriales', 'Locales comerciales y restaurantes'],
+        servicios_destacados: ['Limpieza de fin de obra', 'Limpieza de comunidades', 'Limpieza industrial', 'Limpieza de oficinas'],
+        barrios: ['Pilar de la Horadada centro', 'Mil Palmeras', 'Torre de la Horadada', 'El Mojón', 'Pinar de Campoverde'],
+        meta_description: 'Empresa de limpieza en Pilar de la Horadada. Limpieza de fin de obra, comunidades y oficinas. Presupuesto sin compromiso ☎ 604 438 618',
+        particularidades: 'En Pilar de la Horadada somos especialistas en limpieza de fin de obra para las nuevas promociones residenciales. También trabajamos con polígonos industriales del municipio.'
+    },
+    {
+        slug: 'san-miguel-de-salinas',
+        nombre: 'San Miguel de Salinas',
+        provincia: 'Alicante',
+        habitantes: '~6.500',
+        geo: { lat: 37.9826, lng: -0.7858 },
+        descripcion_corta: 'Limpieza para comunidades del interior de la Vega Baja.',
+        intro: 'San Miguel de Salinas es un municipio del interior con un alto porcentaje de población internacional. Trabajamos tanto con comunidades del casco urbano como con urbanizaciones residenciales en las afueras.',
+        tipos_propiedad: ['Urbanizaciones residenciales (Las Filipinas, Blue Lagoon)', 'Comunidades en casco urbano', 'Locales y restaurantes'],
+        servicios_destacados: ['Limpieza de comunidades', 'Mantenimiento periódico', 'Limpieza de oficinas y locales'],
+        barrios: ['Casco urbano', 'Las Filipinas', 'Blue Lagoon', 'Las Comunicaciones'],
+        meta_description: 'Empresa de limpieza en San Miguel de Salinas. Limpieza de comunidades y urbanizaciones residenciales. ☎ 604 438 618',
+        particularidades: 'Atendemos en varios idiomas a las comunidades internacionales de San Miguel. Servicio adaptado a urbanizaciones con piscina y amplias zonas comunes ajardinadas.'
+    },
+    {
+        slug: 'los-montesinos',
+        nombre: 'Los Montesinos',
+        provincia: 'Alicante',
+        habitantes: '~5.000',
+        geo: { lat: 38.0042, lng: -0.7461 },
+        descripcion_corta: 'Servicio cercano y personalizado en Los Montesinos.',
+        intro: 'En Los Montesinos prestamos servicio a comunidades del centro y a urbanizaciones cercanas. Servicio rápido y personalizado al ser un municipio pequeño y muy próximo a Torrevieja.',
+        tipos_propiedad: ['Comunidades del casco urbano', 'Chalets y viviendas unifamiliares', 'Locales comerciales'],
+        servicios_destacados: ['Limpieza de comunidades', 'Limpieza de locales', 'Limpiezas de mantenimiento'],
+        barrios: ['Casco urbano', 'La Herrada', 'Las Comunicaciones'],
+        meta_description: 'Empresa de limpieza en Los Montesinos (Alicante). Comunidades, locales y mantenimiento. Cobertura inmediata ☎ 604 438 618',
+        particularidades: 'En municipios pequeños como Los Montesinos prestamos atención muy personalizada con la misma supervisión que en grandes comunidades de Torrevieja.'
+    },
+    {
+        slug: 'rojales',
+        nombre: 'Rojales',
+        provincia: 'Alicante',
+        habitantes: '~17.000',
+        geo: { lat: 38.0875, lng: -0.7228 },
+        descripcion_corta: 'Cobertura completa en Rojales y sus pedanías.',
+        intro: 'Rojales y su pedanía Ciudad Quesada son una de las zonas más pobladas del interior de la Vega Baja. Trabajamos con muchas comunidades de Ciudad Quesada, La Marquesa y Doña Pepa.',
+        tipos_propiedad: ['Urbanizaciones de Ciudad Quesada', 'Comunidades en La Marquesa', 'Apartamentos y chalets en Doña Pepa', 'Locales comerciales y restaurantes'],
+        servicios_destacados: ['Limpieza de comunidades grandes', 'Limpieza de parkings comunitarios', 'Mantenimiento periódico', 'Limpieza de cristales'],
+        barrios: ['Rojales centro', 'Ciudad Quesada', 'La Marquesa', 'Doña Pepa', 'Benimar'],
+        meta_description: 'Empresa de limpieza en Rojales y Ciudad Quesada. Comunidades, parkings, mantenimiento integral. ☎ 604 438 618',
+        particularidades: 'Especialistas en grandes urbanizaciones de Ciudad Quesada y La Marquesa, con calendarios de mantenimiento adaptados y maquinaria propia para parkings.'
+    },
+    {
+        slug: 'vega-baja',
+        nombre: 'Vega Baja del Segura',
+        provincia: 'Alicante',
+        habitantes: '~360.000',
+        geo: { lat: 38.0871, lng: -0.9462 },
+        descripcion_corta: 'Empresa de limpiezas en toda la comarca de la Vega Baja.',
+        intro: 'Operamos en toda la comarca de la Vega Baja del Segura. Con base en Torrevieja, llegamos a cualquier municipio en menos de 1 hora con maquinaria profesional propia y equipo cualificado.',
+        tipos_propiedad: ['Comunidades de vecinos', 'Garajes y parkings comunitarios', 'Oficinas y locales comerciales', 'Naves industriales', 'Polígonos industriales', 'Centros logísticos'],
+        servicios_destacados: ['Limpieza de comunidades', 'Limpieza industrial y de naves', 'Limpieza de garajes con fregadora', 'Mantenimiento de oficinas', 'Limpiezas de fin de obra'],
+        barrios: ['Torrevieja', 'Orihuela', 'Almoradí', 'Callosa de Segura', 'Bigastro', 'Catral', 'Cox', 'Dolores', 'Granja de Rocamora', 'Jacarilla', 'Rafal', 'Redován', 'San Fulgencio', 'Algorfa', 'Benferri', 'Daya Nueva', 'Daya Vieja', 'Formentera del Segura'],
+        meta_description: 'Empresa de limpiezas en la Vega Baja del Segura. Servicios profesionales en toda la comarca: Torrevieja, Orihuela, Almoradí, Callosa, Rojales y más.',
+        particularidades: 'Como empresa de limpiezas en la Vega Baja, atendemos a más de 200 clientes en toda la comarca. Cobertura desde Pilar de la Horadada hasta San Fulgencio y desde la costa hasta el interior.'
+    }
+];
+
+export function getLocalidad(slug) {
+    return localidades.find(l => l.slug === slug);
+}

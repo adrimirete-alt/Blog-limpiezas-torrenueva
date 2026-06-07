@@ -1,18 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/zonas.css';
+import { localidades } from '../data/localidades.js';
 ---
-<Layout title="Zonas de Actuación | Limpiezas Torrenueva">
+<Layout
+    title="Zonas de Servicio: Limpiezas en Torrevieja y Vega Baja | Torrenueva"
+    description="Empresa de limpiezas que opera en Torrevieja, La Mata, Orihuela Costa, Guardamar del Segura, Pilar de la Horadada, Rojales y toda la Vega Baja. ☎ 604 438 618"
+>
     <main>
         <!-- Page Hero -->
         <section class="page-hero">
             <div class="page-hero__bg">
-                <img src="/zonas-hero.png" alt="Torrevieja y Vega Baja" class="page-hero__img">
+                <img src="/zonas-hero.png" alt="Mapa de zonas de servicio en Torrevieja y Vega Baja" class="page-hero__img" loading="eager">
             </div>
             <div class="page-hero__overlay"></div>
             <div class="container page-hero__content">
-                <h1 class="page-hero__title">Dónde Trabajamos</h1>
-                <p class="page-hero__subtitle">Prestamos servicio en Torrevieja y toda la comarca de la Vega Baja.</p>
+                <h1 class="page-hero__title">Zonas de Servicio en Torrevieja y Vega Baja</h1>
+                <p class="page-hero__subtitle">Limpieza profesional en Torrevieja y toda la comarca de la Vega Baja del Segura.</p>
             </div>
         </section>
 
@@ -29,29 +33,13 @@ import '../styles/zonas.css';
                             <p class="text-body" style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto;">Llegamos allí donde nos necesite. Nuestra logística nos permite cubrir eficazmente toda la zona costera y el interior de la Vega Baja.</p>
                         </div>
 
-                        <!-- Card 1 -->
-                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Torrevieja (Sede Central)</h3>
-                            <p style="color: #64748b;">Cubrimos todos los barrios y urbanizaciones: El Acequión, Los Balcones, La Siesta, Aguas Nuevas, Centro, Playa del Cura, etc.</p>
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Orihuela Costa</h3>
-                            <p style="color: #64748b;">Punta Prima, Playa Flamenca, La Zenia, Cabo Roig, Villamartín, Campoamor. Servicio integral para grandes comunidades y urbanizaciones.</p>
-                        </div>
-
-                        <!-- Card 3 -->
-                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Guardamar y La Mata</h3>
-                            <p style="color: #64748b;">Servicio extendido a la zona norte de nuestra área de influencia, incluyendo La Mata y Guardamar del Segura.</p>
-                        </div>
-                        
-                        <!-- Card 4 -->
-                        <div class="zone-card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid #3b82f6;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #1e293b;">Interior Vega Baja</h3>
-                            <p style="color: #64748b;">San Miguel de Salinas, Los Montesinos, Rojales, Ciudad Quesada y alrededores.</p>
-                        </div>
+                        {localidades.map(loc => (
+                            <a href={`/zonas/${loc.slug}`} class="zone-card" style="display: block; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 1.5rem; border-left: 4px solid #3b82f6; text-decoration: none; color: inherit; transition: all 0.2s;">
+                                <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #1e293b;">Limpiezas en {loc.nombre}</h3>
+                                <p style="color: #64748b; margin-bottom: 0.75rem;">{loc.descripcion_corta}</p>
+                                <span style="color: #3b82f6; font-weight: 600; font-size: 0.9rem;">Ver detalles →</span>
+                            </a>
+                        ))}
 
                     </div>
 

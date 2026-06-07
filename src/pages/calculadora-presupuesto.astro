@@ -1,0 +1,211 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import { localidades } from '../data/localidades.js';
+---
+<Layout
+    title="Calculadora de Presupuesto de Limpieza en Torrevieja | Online"
+    description="Calcula tu presupuesto orientativo de limpieza para comunidades, garajes, oficinas o industrial en Torrevieja y Vega Baja en 60 segundos. Gratis."
+>
+    <main>
+        <section class="page-hero">
+            <div class="page-hero__bg" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                <div class="page-hero__overlay" style="background: rgba(0,0,0,0.2);"></div>
+            </div>
+            <div class="container page-hero__content">
+                <h1 class="page-hero__title">Tu presupuesto de limpieza en 60 segundos</h1>
+                <p class="page-hero__subtitle">Calcula online un rango orientativo y recibe un presupuesto exacto en menos de 24 horas.</p>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container" style="max-width: 720px;">
+                <div class="calc-card">
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+                    <form id="calcForm" novalidate>
+                        <div class="step active" data-step="1">
+                            <h2>¿Qué tipo de propiedad?</h2>
+                            <div class="options-grid">
+                                <label class="opt"><input type="radio" name="tipo_propiedad" value="comunidad" required><span>🏢<br>Comunidad de vecinos</span></label>
+                                <label class="opt"><input type="radio" name="tipo_propiedad" value="oficina"><span>🏬<br>Oficina o local</span></label>
+                                <label class="opt"><input type="radio" name="tipo_propiedad" value="garaje"><span>🚗<br>Garaje / parking</span></label>
+                                <label class="opt"><input type="radio" name="tipo_propiedad" value="industrial"><span>🏭<br>Nave / industrial</span></label>
+                            </div>
+                        </div>
+
+                        <div class="step" data-step="2">
+                            <h2>¿Cuántos m² aproximadamente?</h2>
+                            <div class="options-grid">
+                                <label class="opt"><input type="radio" name="m2" value="100"><span>Hasta 200 m²</span></label>
+                                <label class="opt"><input type="radio" name="m2" value="500"><span>200 - 500 m²</span></label>
+                                <label class="opt"><input type="radio" name="m2" value="1500"><span>500 - 1.500 m²</span></label>
+                                <label class="opt"><input type="radio" name="m2" value="3000"><span>+1.500 m²</span></label>
+                            </div>
+                        </div>
+
+                        <div class="step" data-step="3">
+                            <h2>¿Con qué frecuencia?</h2>
+                            <div class="options-grid">
+                                <label class="opt"><input type="radio" name="frecuencia" value="diaria"><span>Diaria</span></label>
+                                <label class="opt"><input type="radio" name="frecuencia" value="semanal"><span>Semanal (2-5/sem)</span></label>
+                                <label class="opt"><input type="radio" name="frecuencia" value="quincenal"><span>Quincenal</span></label>
+                                <label class="opt"><input type="radio" name="frecuencia" value="mensual"><span>Mensual</span></label>
+                                <label class="opt"><input type="radio" name="frecuencia" value="puntual"><span>Puntual / única</span></label>
+                            </div>
+                        </div>
+
+                        <div class="step" data-step="4">
+                            <h2>¿En qué localidad?</h2>
+                            <select name="localidad" required class="select-localidad">
+                                <option value="">Selecciona una localidad…</option>
+                                {localidades.map(loc => <option value={loc.nombre}>{loc.nombre}</option>)}
+                                <option value="Otra">Otra (Vega Baja)</option>
+                            </select>
+                        </div>
+
+                        <div class="step" data-step="5">
+                            <h2>Recibe tu presupuesto exacto</h2>
+                            <p style="color: #64748b; margin-bottom: 1.5rem;">Te enviamos el cálculo personalizado por email y te llamamos para confirmar dudas.</p>
+                            <input type="text" name="nombre" placeholder="Nombre" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <input type="tel" name="telefono" placeholder="Teléfono (recomendado)">
+                            <label class="check-line">
+                                <input type="checkbox" name="consent_rgpd" required>
+                                <span>Acepto la <a href="/privacidad" target="_blank">política de privacidad</a> y el tratamiento de mis datos para responder a la solicitud. *</span>
+                            </label>
+                            <label class="check-line">
+                                <input type="checkbox" name="consent_marketing">
+                                <span>Acepto recibir información comercial de Limpiezas Torrenueva (opcional).</span>
+                            </label>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" id="prevBtn" class="button button--outline" style="display:none;">← Anterior</button>
+                            <button type="button" id="nextBtn" class="button button--primary">Siguiente →</button>
+                            <button type="submit" id="submitBtn" class="button button--primary" style="display:none;">Calcular mi presupuesto</button>
+                        </div>
+                    </form>
+
+                    <div class="result" id="result" style="display:none;">
+                        <div class="result__icon">✓</div>
+                        <h2>¡Recibido!</h2>
+                        <p>Tu presupuesto orientativo es de:</p>
+                        <div class="price-range" id="priceRange">—</div>
+                        <p style="margin: 1rem 0; color: #64748b;">Te enviaremos un presupuesto exacto por email en menos de <strong>24 horas</strong>.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+                            <a href="tel:+34604438618" class="button button--primary">☎ Llamar ahora</a>
+                            <a href="https://wa.me/34604438618" target="_blank" rel="noopener" class="button button--outline">WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .calc-card { background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .progress-bar { background: #e2e8f0; height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 2rem; }
+    .progress-fill { background: linear-gradient(90deg, #3b82f6, #1e40af); height: 100%; width: 20%; transition: width 0.3s; }
+    .step { display: none; animation: fade-in 0.3s; }
+    .step.active { display: block; }
+    .step h2 { font-size: 1.4rem; color: #1e293b; margin-bottom: 1.5rem; }
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .opt input { display: none; }
+    .opt span { display: block; padding: 1.25rem; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.15s; font-weight: 500; }
+    .opt input:checked + span { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
+    .opt:hover span { border-color: #93c5fd; }
+    input[type="text"], input[type="email"], input[type="tel"], select { width: 100%; padding: 0.875rem 1rem; border: 1px solid #d1d5db; border-radius: 10px; font-size: 1rem; margin-bottom: 1rem; box-sizing: border-box; }
+    .check-line { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.875rem; color: #475569; margin-bottom: 0.75rem; }
+    .check-line input { margin-top: 0.25rem; }
+    .step-actions { display: flex; gap: 1rem; justify-content: space-between; margin-top: 2rem; }
+    .result { text-align: center; }
+    .result__icon { width: 70px; height: 70px; background: #10b981; color: white; border-radius: 50%; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .price-range { font-size: 2.5rem; font-weight: 800; color: #1e40af; margin: 1.5rem 0; }
+    @keyframes fade-in { from { opacity: 0; transform: translateY(5px);} to { opacity: 1; transform: translateY(0);} }
+</style>
+
+<script>
+    const form = document.getElementById('calcForm');
+    const steps = form.querySelectorAll('.step');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const progressFill = document.getElementById('progressFill');
+    const result = document.getElementById('result');
+    let currentStep = 1;
+    const totalSteps = steps.length;
+
+    function showStep(n) {
+        steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === n));
+        progressFill.style.width = `${(n/totalSteps) * 100}%`;
+        prevBtn.style.display = n === 1 ? 'none' : 'inline-flex';
+        nextBtn.style.display = n === totalSteps ? 'none' : 'inline-flex';
+        submitBtn.style.display = n === totalSteps ? 'inline-flex' : 'none';
+    }
+
+    function validateStep(n) {
+        const step = form.querySelector(`.step[data-step="${n}"]`);
+        const required = step.querySelectorAll('[required]');
+        for (const el of required) {
+            if (el.type === 'radio') {
+                const group = form.querySelectorAll(`[name="${el.name}"]`);
+                if (![...group].some(r => r.checked)) return false;
+            } else if (!el.value || (el.type === 'checkbox' && !el.checked)) return false;
+        }
+        return true;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (!validateStep(currentStep)) {
+            alert('Por favor, completa este paso para continuar.');
+            return;
+        }
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validateStep(currentStep)) {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando…';
+
+        const data = Object.fromEntries(new FormData(form));
+        data.consent_rgpd = form.querySelector('[name="consent_rgpd"]').checked;
+        data.consent_marketing = form.querySelector('[name="consent_marketing"]').checked;
+        data.fuente = 'calculadora';
+
+        try {
+            const res = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            const json = await res.json();
+            if (!res.ok) throw new Error(json.error || 'Error');
+
+            form.style.display = 'none';
+            result.style.display = 'block';
+            const range = json.presupuesto;
+            document.getElementById('priceRange').textContent = `${range.min} – ${range.max} €/mes`;
+        } catch (err) {
+            alert('Hubo un error: ' + err.message + '. Por favor, llámanos al 604 438 618.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Calcular mi presupuesto';
+        }
+    });
+</script>

@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { localidades, getLocalidad } from '../../data/localidades.js';
+
+export function getStaticPaths() {
+    return localidades.map(loc => ({ params: { localidad: loc.slug } }));
+}
+
+const { localidad } = Astro.params;
+const data = getLocalidad(localidad);
+
+if (!data) return Astro.redirect('/zonas');
+
+const title = `Empresa de Limpieza en ${data.nombre} | Limpiezas Torrenueva`;
+const description = data.meta_description;
+
+const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `Servicios de limpieza en ${data.nombre}`,
+    "provider": {
+        "@type": "CleaningService",
+        "name": "Limpiezas Torrenueva",
+        "telephone": "+34604438618",
+        "url": "https://limpiezastorrenueva.com"
+    },
+    "areaServed": {
+        "@type": "City",
+        "name": data.nombre,
+        "geo": { "@type": "GeoCoordinates", "latitude": data.geo.lat, "longitude": data.geo.lng }
+    },
+    "description": data.intro
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://limpiezastorrenueva.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Zonas", "item": "https://limpiezastorrenueva.com/zonas" },
+        { "@type": "ListItem", "position": 3, "name": data.nombre, "item": `https://limpiezastorrenueva.com/zonas/${data.slug}` }
+    ]
+};
+---
+<Layout title={title} description={description}>
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} slot="head" />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
+    <main>
+        <section class="page-hero">
+            <div class="page-hero__bg" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                <div class="page-hero__overlay" style="background: rgba(0,0,0,0.2);"></div>
+            </div>
+            <div class="container page-hero__content">
+                <nav aria-label="Migas de pan" style="margin-bottom: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.85);">
+                    <a href="/" style="color: inherit;">Inicio</a> ›
+                    <a href="/zonas" style="color: inherit;">Zonas</a> › <span>{data.nombre}</span>
+                </nav>
+                <h1 class="page-hero__title">Empresa de Limpieza en {data.nombre}</h1>
+                <p class="page-hero__subtitle">{data.descripcion_corta}</p>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="tel:+34604438618" class="button button--white">☎ Llamar ahora</a>
+                    <a href={`https://wa.me/34604438618?text=Hola%2C%20necesito%20presupuesto%20de%20limpieza%20en%20${encodeURIComponent(data.nombre)}`} target="_blank" rel="noopener" class="button button--outline">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container" style="max-width: 1100px;">
+                <div class="grid grid--2-cols" style="gap: 3rem; align-items: start;">
+                    <div>
+                        <span class="section-tag">Limpieza en {data.nombre}</span>
+                        <h2 class="section-title" style="margin-bottom: 1.5rem;">Limpiezas Torrenueva en {data.nombre}</h2>
+                        <p class="text-body" style="margin-bottom: 1.5rem;">{data.intro}</p>
+                        <p class="text-body">{data.particularidades}</p>
+
+                        <ul class="features-list" style="margin-top: 2rem;">
+                            <li class="features-list__item"><span class="check-icon">✓</span> Más de 15 años de experiencia</li>
+                            <li class="features-list__item"><span class="check-icon">✓</span> Maquinaria propia profesional</li>
+                            <li class="features-list__item"><span class="check-icon">✓</span> Presupuesto sin compromiso en 24h</li>
+                            <li class="features-list__item"><span class="check-icon">✓</span> Seguro de Responsabilidad Civil</li>
+                        </ul>
+                    </div>
+
+                    <aside style="background: #f8fafc; padding: 2rem; border-radius: 16px; border: 1px solid #e2e8f0; position: sticky; top: 100px;">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Datos de servicio en {data.nombre}</h3>
+                        <dl style="display: grid; gap: 0.75rem; font-size: 0.95rem;">
+                            <div><dt style="font-weight: 600; color: #64748b;">Población</dt><dd>{data.habitantes} habitantes</dd></div>
+                            <div><dt style="font-weight: 600; color: #64748b;">Tiempo de respuesta</dt><dd>24-48h presupuesto</dd></div>
+                            <div><dt style="font-weight: 600; color: #64748b;">Servicio activo</dt><dd>Lunes a sábado</dd></div>
+                            <div><dt style="font-weight: 600; color: #64748b;">Teléfono directo</dt><dd><a href="tel:+34604438618" style="color: #3b82f6;">604 438 618</a></dd></div>
+                        </dl>
+                        <a href="/contacto" class="button button--primary full-width" style="margin-top: 1.5rem; display: block; text-align: center;">Pedir presupuesto</a>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background: #f8fafc;">
+            <div class="container">
+                <div class="section-header center-text" style="margin-bottom: 3rem;">
+                    <span class="section-tag">Servicios</span>
+                    <h2 class="section-title">Servicios de limpieza en {data.nombre}</h2>
+                </div>
+                <div class="grid grid--3-cols">
+                    {data.servicios_destacados.map(servicio => (
+                        <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                            <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: #3b82f6; font-size: 1.5rem;">✓</div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #1e293b;">{servicio}</h3>
+                            <p style="font-size: 0.9rem; color: #64748b;">Disponible en {data.nombre} y zonas cercanas.</p>
+                        </div>
+                    ))}
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="/servicios" class="link-arrow">Ver todos nuestros servicios →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container" style="max-width: 900px;">
+                <div class="section-header center-text" style="margin-bottom: 2rem;">
+                    <span class="section-tag">Cobertura</span>
+                    <h2 class="section-title">Tipos de propiedad que limpiamos en {data.nombre}</h2>
+                </div>
+                <div class="grid grid--2-cols" style="gap: 1rem;">
+                    {data.tipos_propiedad.map(tipo => (
+                        <div style="background: white; padding: 1.25rem 1.5rem; border-radius: 10px; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 0.75rem;">
+                            <span style="color: #3b82f6; font-weight: 700; font-size: 1.2rem;">›</span>
+                            <span style="color: #334155;">{tipo}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {data.barrios && data.barrios.length > 0 && (
+                    <div style="margin-top: 3rem; padding: 2rem; background: #eff6ff; border-radius: 16px;">
+                        <h3 style="margin-bottom: 1rem; color: #1e40af;">Zonas que cubrimos en {data.nombre}</h3>
+                        <p style="margin-bottom: 1rem; color: #475569;">Trabajamos a diario en:</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            {data.barrios.map(barrio => (
+                                <span style="background: white; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.875rem; color: #1e40af; border: 1px solid #bfdbfe;">{barrio}</span>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+
+        <section class="section-padding bg-dark text-white" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+            <div class="container" style="max-width: 800px; text-align: center;">
+                <h2 style="color: white; font-size: 2rem; margin-bottom: 1rem;">¿Necesitas un presupuesto en {data.nombre}?</h2>
+                <p style="opacity: 0.9; margin-bottom: 2rem; font-size: 1.1rem;">Llámanos al 604 438 618 o pide tu presupuesto online. Te respondemos en menos de 24 horas.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="tel:+34604438618" class="button button--white">☎ 604 438 618</a>
+                    <a href="/contacto" class="button button--outline" style="border-color: white; color: white;">Pedir presupuesto online</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header center-text" style="margin-bottom: 3rem;">
+                    <h2 class="section-title">Te puede interesar</h2>
+                </div>
+                <div class="grid grid--3-cols" style="gap: 1.5rem;">
+                    <a href="/servicios" style="display: block; padding: 2rem; background: white; border: 1px solid #e2e8f0; border-radius: 12px; text-decoration: none; color: #1e293b; transition: all 0.2s;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Nuestros servicios</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Conoce todos los servicios de limpieza que ofrecemos.</p>
+                    </a>
+                    <a href="/testimonios" style="display: block; padding: 2rem; background: white; border: 1px solid #e2e8f0; border-radius: 12px; text-decoration: none; color: #1e293b; transition: all 0.2s;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Opiniones de clientes</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Más de 200 clientes nos avalan en la Vega Baja.</p>
+                    </a>
+                    <a href="/blog" style="display: block; padding: 2rem; background: white; border: 1px solid #e2e8f0; border-radius: 12px; text-decoration: none; color: #1e293b; transition: all 0.2s;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Blog de limpieza</h3>
+                        <p style="color: #64748b; font-size: 0.9rem;">Consejos y guías de limpieza profesional.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>

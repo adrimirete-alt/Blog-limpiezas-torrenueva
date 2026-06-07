@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { categoriasMaquinaria } from '../../data/maquinaria.js';
+---
+<Layout
+    title="Maquinaria Profesional de Limpieza en Torrevieja | Limpiezas Torrenueva"
+    description="Venta de fregadoras, barredoras, aspiradores y equipos profesionales de limpieza en Torrevieja. Asesoramiento, garantía y servicio técnico ☎ 604 438 618"
+>
+    <main>
+        <section class="page-hero">
+            <div class="page-hero__bg" style="background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);">
+                <div class="page-hero__overlay"></div>
+            </div>
+            <div class="container page-hero__content">
+                <h1 class="page-hero__title">Maquinaria Profesional de Limpieza en Torrevieja</h1>
+                <p class="page-hero__subtitle">Venta y asesoramiento de fregadoras, barredoras, aspiradores y equipos de limpieza industrial.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="tel:+34604438618" class="button button--white">☎ Pedir información</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-header center-text" style="margin-bottom: 3rem;">
+                    <span class="section-tag">Catálogo</span>
+                    <h2 class="section-title">Categorías de Maquinaria</h2>
+                    <p class="text-body" style="max-width: 700px; margin: 1rem auto 0;">Trabajamos con las mejores marcas del sector y ofrecemos asesoramiento personalizado para que elijas el equipo perfecto para tu actividad.</p>
+                </div>
+
+                <div class="services__grid">
+                    {categoriasMaquinaria.map(cat => (
+                        <a href={`/maquinaria/${cat.slug}`} class="service-card" style="text-decoration: none; color: inherit;">
+                            <div class="service-card__image">
+                                <img src={cat.imagen} alt={cat.nombre} loading="lazy">
+                            </div>
+                            <div class="service-card__content">
+                                <h3 class="service-card__title">{cat.nombre}</h3>
+                                <p class="service-card__desc">{cat.intro.substring(0, 130)}…</p>
+                                <span class="link-arrow">Ver catálogo <span>→</span></span>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding bg-dark text-white" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+            <div class="container" style="max-width: 800px; text-align: center;">
+                <h2 style="color: white; font-size: 2rem; margin-bottom: 1rem;">¿No sabes qué máquina necesitas?</h2>
+                <p style="opacity: 0.9; margin-bottom: 2rem; font-size: 1.1rem;">Llámanos al 604 438 618 y nuestro equipo técnico te asesorará gratis sobre el equipo perfecto para tu negocio.</p>
+                <a href="tel:+34604438618" class="button button--white">☎ 604 438 618</a>
+            </div>
+        </section>
+    </main>
+</Layout>

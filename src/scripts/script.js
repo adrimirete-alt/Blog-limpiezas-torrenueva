@@ -4,32 +4,29 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-// Custom Cursor
+// Custom Cursor (desktop only, no reduced motion)
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (window.matchMedia("(hover: hover)").matches) {
+if (cursorDot && cursorOutline && window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reducedMotion) {
     window.addEventListener("mousemove", (e) => {
         const posX = e.clientX;
         const posY = e.clientY;
-
-        // Dot follows instantly
         cursorDot.style.left = `${posX}px`;
         cursorDot.style.top = `${posY}px`;
-
-        // Outline follows with slight delay (GSAP)
         gsap.to(cursorOutline, {
             x: posX,
             y: posY,
             duration: 0.15,
             ease: "power2.out",
-            css: { left: 0, top: 0 } // Reset CSS positioning to rely on transform
+            css: { left: 0, top: 0 }
         });
     });
+} else if (cursorDot && cursorOutline) {
+    cursorDot.style.display = 'none';
+    cursorOutline.style.display = 'none';
 }
-
-// Register ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
 
 // Hero Animations
 const heroSection = document.querySelector('.hero');

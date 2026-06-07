@@ -1,18 +1,43 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+    { q: "¿Qué servicios de limpieza ofrecen en Torrevieja?", a: "Ofrecemos una amplia gama de servicios especializados: limpieza de comunidades de vecinos, mantenimiento de garajes y parkings, limpieza de cristales en altura, limpieza de oficinas y grandes superficies, así como tratamientos de suelos (abrillantado y pulido)." },
+    { q: "¿Cubren la zona de Vega Baja?", a: "Sí, nuestra base está en Torrevieja pero prestamos servicio en toda la comarca de la Vega Baja, incluyendo Orihuela Costa, Guardamar del Segura, Rojales, Pilar de la Horadada y alrededores." },
+    { q: "¿Ofrecen presupuestos gratuitos?", a: "Sí, totalmente gratuitos y sin compromiso. Nos desplazamos a sus instalaciones para evaluar el trabajo y ofrecerle la mejor solución personalizada." },
+    { q: "¿Cuál es el plazo máximo de ejecución de los trabajos?", a: "El plazo depende de la envergadura del proyecto. Para mantenimientos, establecemos un calendario periódico. Para limpiezas puntuales o de fin de obra, intentamos iniciar el trabajo en un plazo de 24-48 horas tras la aceptación del presupuesto." },
+    { q: "¿Qué productos de limpieza utilizan?", a: "Utilizamos exclusivamente productos profesionales de alta eficacia, respetuosos con el medio ambiente y específicos para cada tipo de superficie, garantizando resultados óptimos sin dañar los materiales." },
+    { q: "¿Tienen maquinaria profesional para trabajos grandes?", a: "Sí, contamos con flota propia de maquinaria industrial: fregadoras de conductor sentado y manuales, hidrolimpiadoras de alta presión, aspiradoras industriales y equipos de limpieza de cristales en altura." },
+    { q: "¿Ofrecen servicios de urgencia?", a: "Estudiamos casos de urgencia (inundaciones, siniestros, limpiezas express) fuera de nuestro horario habitual para dar respuesta a necesidades críticas de nuestros clientes." },
+    { q: "¿Cómo puedo contactar con Limpiezas Torrenueva?", a: "Puede llamarnos al 604 438 618, enviarnos un email a info@limpiezastorrenueva.com o utilizar el formulario de contacto de esta web. También atendemos por WhatsApp." },
+    { q: "¿Están asegurados y certificados?", a: "Por supuesto. Cumplimos con toda la normativa vigente en prevención de riesgos laborales y contamos con seguro de Responsabilidad Civil para garantizar la tranquilidad total de nuestros clientes." }
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    }))
+};
 ---
-<Layout title="Preguntas Frecuentes | Limpiezas Torrenueva">
+<Layout
+    title="Preguntas Frecuentes sobre Limpieza en Torrevieja | Torrenueva"
+    description="Resolvemos tus dudas sobre limpieza de comunidades, garajes, oficinas y servicios en Torrevieja y Vega Baja. Presupuesto sin compromiso ☎ 604 438 618"
+>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
     <main>
         <!-- Page Hero -->
         <section class="page-hero">
             <div class="page-hero__bg">
-                <img src="/faq_hero_laptop.png"
-                    alt="Preguntas Frecuentes" class="page-hero__img">
+                <img src="/faq_hero_laptop.png" alt="Preguntas frecuentes sobre servicios de limpieza en Torrevieja" class="page-hero__img" loading="eager">
             </div>
             <div class="page-hero__overlay"></div>
             <div class="container page-hero__content">
-                <h1 class="page-hero__title">Preguntas Frecuentes</h1>
-                <p class="page-hero__subtitle">Resolvemos sus dudas de forma rápida y sencilla.</p>
+                <h1 class="page-hero__title">Preguntas Frecuentes sobre Limpieza en Torrevieja</h1>
+                <p class="page-hero__subtitle">Resolvemos tus dudas sobre nuestros servicios de limpieza en Torrevieja y la Vega Baja.</p>
             </div>
         </section>
 

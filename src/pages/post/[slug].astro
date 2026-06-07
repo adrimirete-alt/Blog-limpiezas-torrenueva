@@ -1,209 +1,187 @@
 ---
+export const prerender = false;
+
 import Layout from '../../layouts/Layout.astro';
 import { supabase } from '../../lib/supabase';
-
-export async function getStaticPaths() {
-  try {
-    const { data: posts } = await supabase.from('posts').select('slug');
-    return posts?.map(post => ({ params: { slug: post.slug } })) || [];
-  } catch (e) {
-    console.error('Error fetching static paths:', e);
-    return [];
-  }
-}
 
 const { slug } = Astro.params;
 
 let post;
-try {
-  const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+let relatedPosts = [];
 
-  if (error) throw error;
-  post = data;
+try {
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('slug', slug)
+        .eq('published', true)
+        .single();
+
+    if (error) throw error;
+    post = data;
+
+    if (post) {
+        const { data: related } = await supabase
+            .from('posts')
+            .select('id, title, slug, description, image_url, category, reading_time')
+            .eq('published', true)
+            .eq('category', post.category)
+            .neq('id', post.id)
+            .order('created_at', { ascending: false })
+            .limit(3);
+        relatedPosts = related || [];
+    }
 } catch (e) {
-  console.error('Error fetching post:', e);
-  return Astro.redirect('/404');
+    return Astro.redirect('/blog');
 }
 
-if (!post) return Astro.redirect('/404');
+if (!post) return Astro.redirect('/blog');
+
+const fullUrl = `https://limpiezastorrenueva.com/post/${post.slug}`;
+const readingTime = post.reading_time || Math.max(3, Math.ceil((post.content || '').split(/\s+/).length / 200));
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.meta_description || post.description,
+    "image": post.image_url || "https://limpiezastorrenueva.com/og-image.jpg",
+    "datePublished": post.created_at,
+    "dateModified": post.updated_at || post.created_at,
+    "author": { "@type": "Organization", "name": "Limpiezas Torrenueva", "url": "https://limpiezastorrenueva.com" },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Limpiezas Torrenueva",
+        "logo": { "@type": "ImageObject", "url": "https://limpiezastorrenueva.com/logo.png" }
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": fullUrl }
+};
+
+const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://limpiezastorrenueva.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://limpiezastorrenueva.com/blog" },
+        { "@type": "ListItem", "position": 3, "name": post.title, "item": fullUrl }
+    ]
+};
 ---
+<Layout
+    title={post.meta_title || `${post.title} | Blog Limpiezas Torrenueva`}
+    description={post.meta_description || post.description}
+    image={post.image_url || '/og-image.jpg'}
+    type="article"
+>
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} slot="head" />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
 
-<Layout title={`${post.title} | Blog Limpiezas Torrenueva`}>
-  <main>
-    <!-- Post Hero Section -->
-    <div class="post-hero">
-        <img src={post.image_url || '/blog-placeholder.jpg'} alt={post.title} class="post-hero__image">
-        <div class="post-hero__overlay"></div>
-        <div class="container post-hero__content">
-            <span class="post-tag">{post.tag || 'Blog'}</span>
-            <h1 class="post-title">{post.title}</h1>
-            <p class="post-date">Publicado el {new Date(post.created_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-        </div>
-    </div>
-
-    <!-- Article Content -->
-    <section class="section-padding post-body-section">
-        <div class="container">
-            <article class="post-article">
-                <div class="article-content" set:html={post.content} />
-                
-                <div class="post-footer">
-                    <a href="/blog" class="button button--primary">← Volver al Blog</a>
+    <main>
+        <div class="post-hero">
+            <img src={post.image_url || '/blog-comunidades.png'} alt={post.title} class="post-hero__image" loading="eager">
+            <div class="post-hero__overlay"></div>
+            <div class="container post-hero__content">
+                <nav aria-label="Migas de pan" style="margin-bottom: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.85);">
+                    <a href="/" style="color: inherit;">Inicio</a> ›
+                    <a href="/blog" style="color: inherit;">Blog</a> ›
+                    {post.category && <a href={`/blog/categoria/${post.category}`} style="color: inherit;">{post.category}</a>}
+                </nav>
+                <span class="post-tag">{post.category || post.tag || 'Blog'}</span>
+                <h1 class="post-title">{post.title}</h1>
+                <div class="post-meta">
+                    <span>📅 {new Date(post.created_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span>· ⏱ {readingTime} min lectura</span>
                 </div>
-            </article>
+            </div>
         </div>
-    </section>
-  </main>
+
+        <section class="section-padding post-body-section">
+            <div class="container">
+                <article class="post-article">
+                    <div class="article-content" set:html={post.content} />
+
+                    <div class="share-bar">
+                        <span class="share-label">Compartir:</span>
+                        <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + fullUrl)}`} target="_blank" rel="noopener" aria-label="Compartir en WhatsApp" class="share-btn share-wa">WhatsApp</a>
+                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(fullUrl)}`} target="_blank" rel="noopener" aria-label="Compartir en Facebook" class="share-btn share-fb">Facebook</a>
+                        <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(fullUrl)}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener" aria-label="Compartir en X" class="share-btn share-tw">X</a>
+                    </div>
+
+                    <div class="post-cta">
+                        <h3>¿Necesitas un servicio de limpieza en Torrevieja?</h3>
+                        <p>Llámanos al 604 438 618 o pide tu presupuesto sin compromiso.</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <a href="tel:+34604438618" class="button button--white">☎ 604 438 618</a>
+                            <a href="/contacto" class="button button--outline" style="border-color: white; color: white;">Pedir presupuesto</a>
+                        </div>
+                    </div>
+
+                    <div class="post-footer">
+                        <a href="/blog" class="button button--primary">← Volver al Blog</a>
+                    </div>
+                </article>
+
+                {relatedPosts.length > 0 && (
+                    <aside class="related-posts">
+                        <h2 style="font-size: 1.5rem; color: #1e293b; margin-bottom: 1.5rem; text-align: center;">Artículos relacionados</h2>
+                        <div class="services__grid">
+                            {relatedPosts.map(rp => (
+                                <a href={`/post/${rp.slug}`} class="service-card" style="text-decoration: none; color: inherit;">
+                                    <div class="service-card__image">
+                                        <img src={rp.image_url || '/blog-comunidades.png'} alt={rp.title} loading="lazy" style="width: 100%; height: 180px; object-fit: cover;">
+                                    </div>
+                                    <div class="service-card__content">
+                                        <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #1e293b;">{rp.title}</h3>
+                                        <span class="link-arrow">Leer →</span>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </aside>
+                )}
+            </div>
+        </section>
+    </main>
 </Layout>
 
 <style>
-    .post-hero {
-        position: relative;
-        height: 60vh;
-        min-height: 400px;
-        max-height: 600px;
-        display: flex;
-        align-items: flex-end;
-        color: white;
-        overflow: hidden;
-    }
+    .post-hero { position: relative; height: 60vh; min-height: 400px; max-height: 600px; display: flex; align-items: flex-end; color: white; overflow: hidden; }
+    .post-hero__image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .post-hero__overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%); z-index: 1; }
+    .post-hero__content { position: relative; z-index: 2; padding-bottom: 4rem; width: 100%; }
+    .post-tag { display: inline-block; background-color: var(--primary, #3b82f6); color: white; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
+    .post-title { color: white; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 1rem; max-width: 900px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    .post-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; font-size: 1rem; opacity: 0.9; }
 
-    .post-hero__image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
+    .post-body-section { background-color: #f8fafc; padding: 4rem 0; }
+    .post-article { max-width: 800px; margin: 0 auto; background: white; padding: 3rem 4rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+    .article-content { font-size: 1.125rem; line-height: 1.8; color: #334155; }
+    .article-content :global(h2) { font-size: 1.8rem; color: #1e293b; margin-top: 2.5rem; margin-bottom: 1.25rem; font-weight: 700; }
+    .article-content :global(h3) { font-size: 1.4rem; color: #1e293b; margin-top: 2rem; margin-bottom: 1rem; font-weight: 600; }
+    .article-content :global(p) { margin-bottom: 1.5rem; }
+    .article-content :global(ul), .article-content :global(ol) { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+    .article-content :global(li) { margin-bottom: 0.5rem; }
+    .article-content :global(strong) { color: #0f172a; font-weight: 600; }
+    .article-content :global(a) { color: #3b82f6; text-decoration: underline; }
+    .article-content :global(blockquote) { border-left: 4px solid #3b82f6; padding-left: 1.5rem; margin: 2rem 0; color: #475569; font-style: italic; }
 
-    .post-hero__overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-        z-index: 1;
-    }
+    .share-bar { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 3rem 0 2rem; padding: 1rem; background: #f8fafc; border-radius: 12px; }
+    .share-label { font-weight: 600; color: #475569; margin-right: 0.5rem; }
+    .share-btn { padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.875rem; font-weight: 600; color: white; }
+    .share-wa { background: #25d366; }
+    .share-fb { background: #1877f2; }
+    .share-tw { background: #000; }
 
-    .post-hero__content {
-        position: relative;
-        z-index: 2;
-        padding-bottom: 4rem;
-        width: 100%;
-    }
+    .post-cta { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 2.5rem; border-radius: 16px; margin: 2rem 0; }
+    .post-cta h3 { color: white; font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .post-cta p { opacity: 0.9; margin-bottom: 1.5rem; }
 
-    .post-tag {
-        display: inline-block;
-        background-color: var(--primary);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-        letter-spacing: 0.05em;
-    }
-
-    .post-title {
-        color: white;
-        font-size: clamp(2rem, 5vw, 3.5rem);
-        line-height: 1.2;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        max-width: 900px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .post-date {
-        font-size: 1.1rem;
-        opacity: 0.9;
-        font-weight: 400;
-    }
-
-    .post-body-section {
-        background-color: #f8fafc;
-        padding: 4rem 0;
-    }
-
-    .post-article {
-        max-width: 800px;
-        margin: 0 auto;
-        background: white;
-        padding: 3rem 4rem;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-    }
-
-    /* Article Typography / Prose Styling */
-    .article-content {
-        font-size: 1.125rem;
-        line-height: 1.8;
-        color: #334155;
-    }
-
-    .article-content :global(h2) {
-        font-size: 1.8rem;
-        color: #1e293b;
-        margin-top: 2.5rem;
-        margin-bottom: 1.25rem;
-        font-weight: 700;
-        letter-spacing: -0.025em;
-    }
-
-    .article-content :global(h3) {
-        font-size: 1.4rem;
-        color: #1e293b;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-    }
-
-    .article-content :global(p) {
-        margin-bottom: 1.5rem;
-    }
-
-    .article-content :global(ul), .article-content :global(ol) {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
-    }
-
-    .article-content :global(li) {
-        margin-bottom: 0.5rem;
-        padding-left: 0.5rem;
-    }
-
-    .article-content :global(strong) {
-        color: #0f172a;
-        font-weight: 600;
-    }
-
-    .post-footer {
-        margin-top: 4rem;
-        padding-top: 2rem;
-        border-top: 1px solid #e2e8f0;
-        display: flex;
-        justify-content: flex-start;
-    }
+    .post-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; }
+    .related-posts { max-width: 1100px; margin: 4rem auto 0; }
 
     @media (max-width: 768px) {
-        .post-article {
-            padding: 2rem;
-        }
-        
-        .post-title {
-            font-size: 2rem;
-        }
-
-        .post-hero {
-            height: 50vh;
-        }
+        .post-article { padding: 2rem 1.5rem; }
+        .post-title { font-size: 2rem; }
+        .post-hero { height: 50vh; }
     }
 </style>

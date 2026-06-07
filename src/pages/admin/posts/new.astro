@@ -1,0 +1,212 @@
+---
+export const prerender = false;
+
+import { createSupabaseServerClient } from '../../../lib/supabase-server';
+
+const supabase = createSupabaseServerClient(Astro.request, Astro.cookies);
+
+let error = '';
+
+if (Astro.request.method === 'POST') {
+    const form = await Astro.request.formData();
+    const title = form.get('title')?.toString().trim() || '';
+    const slug = form.get('slug')?.toString().trim() || '';
+    const description = form.get('description')?.toString().trim() || '';
+    const content = form.get('content')?.toString().trim() || '';
+    const tag = form.get('tag')?.toString().trim() || '';
+    const image_url = form.get('image_url')?.toString().trim() || '';
+
+    if (!title || !slug || !content) {
+        error = 'Título, slug y contenido son obligatorios.';
+    } else {
+        const { error: insertError } = await supabase.from('posts').insert([{
+            title, slug, description, content, tag, image_url
+        }]);
+
+        if (insertError) {
+            error = insertError.message.includes('unique')
+                ? 'Ya existe un artículo con ese slug. Elige otro.'
+                : insertError.message;
+        } else {
+            return Astro.redirect('/admin');
+        }
+    }
+}
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Artículo | Admin</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; }
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .topbar a { color: #64748b; text-decoration: none; font-size: 0.9rem; }
+        .topbar a:hover { color: #3b82f6; }
+        .topbar span { color: #cbd5e1; }
+        .topbar h1 { font-size: 1rem; font-weight: 600; color: #1e293b; }
+
+        .main { max-width: 860px; margin: 2rem auto; padding: 0 2rem; }
+
+        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+        .card h2 { font-size: 1rem; font-weight: 600; color: #1e293b; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #f1f5f9; }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.5rem; }
+        .hint { font-size: 0.75rem; color: #94a3b8; margin-top: 0.25rem; }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            background: white;
+        }
+        input:focus, textarea:focus, select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        textarea { resize: vertical; min-height: 80px; }
+        #content { min-height: 300px; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6; }
+
+        .actions { display: flex; gap: 1rem; justify-content: flex-end; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.5rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: background 0.2s; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-ghost { background: white; color: #64748b; border: 1px solid #e2e8f0; }
+        .btn-ghost:hover { background: #f8fafc; }
+
+        .error { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 0.875rem 1rem; border-radius: 8px; font-size: 0.875rem; margin-bottom: 1.5rem; }
+
+        .toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .tool-btn { padding: 0.35rem 0.7rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 0.8rem; cursor: pointer; color: #475569; transition: all 0.15s; }
+        .tool-btn:hover { background: #eff6ff; border-color: #bfdbfe; color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="/admin">← Dashboard</a>
+        <span>/</span>
+        <h1>Nuevo artículo</h1>
+    </div>
+
+    <div class="main">
+        {error && <div class="error">{error}</div>}
+
+        <form method="POST">
+            <div class="card">
+                <h2>Información principal</h2>
+                <div class="form-group">
+                    <label for="title">Título *</label>
+                    <input type="text" id="title" name="title" required placeholder="Ej: Cómo limpiar un garaje correctamente" oninput="generateSlug(this.value)">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="slug">Slug (URL) *</label>
+                        <input type="text" id="slug" name="slug" required placeholder="como-limpiar-un-garaje">
+                        <p class="hint">Se genera automáticamente. Solo letras, números y guiones.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="tag">Categoría</label>
+                        <select id="tag" name="tag">
+                            <option value="">Sin categoría</option>
+                            <option value="Consejos">Consejos</option>
+                            <option value="Servicios">Servicios</option>
+                            <option value="Comunidades">Comunidades</option>
+                            <option value="Garajes">Garajes</option>
+                            <option value="Oficinas">Oficinas</option>
+                            <option value="Maquinaria">Maquinaria</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción corta</label>
+                    <textarea id="description" name="description" rows="2" placeholder="Resumen que aparece en la lista del blog (1-2 frases)"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image_url">URL de imagen de portada</label>
+                    <input type="url" id="image_url" name="image_url" placeholder="https://...">
+                    <p class="hint">Puedes usar imágenes de Unsplash u otro servicio.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Contenido del artículo</h2>
+                <div class="toolbar">
+                    <button type="button" class="tool-btn" onclick="wrap('<h2>', '</h2>')"><b>H2</b></button>
+                    <button type="button" class="tool-btn" onclick="wrap('<h3>', '</h3>')"><b>H3</b></button>
+                    <button type="button" class="tool-btn" onclick="wrap('<strong>', '</strong>')"><b>B</b></button>
+                    <button type="button" class="tool-btn" onclick="wrap('<em>', '</em>')"><i>I</i></button>
+                    <button type="button" class="tool-btn" onclick="wrapBlock('<p>', '</p>')">Párrafo</button>
+                    <button type="button" class="tool-btn" onclick="insertList()">Lista</button>
+                    <button type="button" class="tool-btn" onclick="insertLine()">— Separador</button>
+                </div>
+                <textarea id="content" name="content" required placeholder="Escribe el contenido en HTML. Ej: <p>Primer párrafo...</p><h2>Subtítulo</h2><p>Más texto...</p>"></textarea>
+                <p class="hint" style="margin-top: 0.5rem;">Escribe directamente en HTML. Usa los botones de arriba para insertar etiquetas.</p>
+            </div>
+
+            <div class="actions">
+                <a href="/admin" class="btn btn-ghost">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Publicar artículo</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function generateSlug(title) {
+            const slug = title
+                .toLowerCase()
+                .normalize('NFD').replace(/[̀-ͯ]/g, '')
+                .replace(/[^a-z0-9\s-]/g, '')
+                .trim()
+                .replace(/\s+/g, '-');
+            document.getElementById('slug').value = slug;
+        }
+
+        function wrap(open, close) {
+            const ta = document.getElementById('content');
+            const start = ta.selectionStart;
+            const end = ta.selectionEnd;
+            const selected = ta.value.substring(start, end);
+            ta.value = ta.value.substring(0, start) + open + selected + close + ta.value.substring(end);
+            ta.focus();
+            ta.setSelectionRange(start + open.length, end + open.length);
+        }
+
+        function wrapBlock(open, close) {
+            const ta = document.getElementById('content');
+            const pos = ta.selectionEnd;
+            ta.value = ta.value.substring(0, pos) + '\n' + open + close + '\n' + ta.value.substring(pos);
+            ta.focus();
+            const newPos = pos + 1 + open.length;
+            ta.setSelectionRange(newPos, newPos);
+        }
+
+        function insertList() {
+            const ta = document.getElementById('content');
+            const pos = ta.selectionEnd;
+            const list = '\n<ul>\n    <li>Elemento 1</li>\n    <li>Elemento 2</li>\n    <li>Elemento 3</li>\n</ul>\n';
+            ta.value = ta.value.substring(0, pos) + list + ta.value.substring(pos);
+            ta.focus();
+        }
+
+        function insertLine() {
+            const ta = document.getElementById('content');
+            const pos = ta.selectionEnd;
+            ta.value = ta.value.substring(0, pos) + '\n<hr>\n' + ta.value.substring(pos);
+            ta.focus();
+        }
+    </script>
+</body>
+</html>

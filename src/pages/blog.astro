@@ -1,62 +1,151 @@
 ---
+export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import { supabase } from '../lib/supabase';
 
+const CATEGORIAS = [
+    { slug: 'todos', nombre: 'Todos' },
+    { slug: 'comunidades', nombre: 'Comunidades' },
+    { slug: 'garajes', nombre: 'Garajes' },
+    { slug: 'oficinas', nombre: 'Oficinas' },
+    { slug: 'industrial', nombre: 'Industrial' },
+    { slug: 'maquinaria', nombre: 'Maquinaria' },
+    { slug: 'zonas', nombre: 'Zonas' },
+    { slug: 'consejos', nombre: 'Consejos' },
+];
+
+const url = new URL(Astro.request.url);
+const page = parseInt(url.searchParams.get('page') || '1', 10);
+const PER_PAGE = 9;
+const from = (page - 1) * PER_PAGE;
+const to = from + PER_PAGE - 1;
+
 let posts = [];
+let total = 0;
+
 try {
-    const { data, error } = await supabase
+    let query = supabase
         .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
-    
-    if (error) {
-        console.error('Error fetching posts:', error);
-    } else {
-        posts = data;
+        .select('*', { count: 'exact' })
+        .eq('published', true)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+    const { data, error, count } = await query;
+    if (!error) {
+        posts = data || [];
+        total = count || 0;
     }
 } catch (e) {
     console.error('Supabase connection failed:', e);
 }
 
+const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
 ---
-<Layout title="Blog | Limpiezas Torrenueva">
+<Layout
+    title="Blog de Limpieza Profesional en Torrevieja | Limpiezas Torrenueva"
+    description="Consejos, guías y novedades sobre limpieza de comunidades, garajes, oficinas e industrial en Torrevieja y Vega Baja. Actualizado por expertos."
+>
     <main>
-        <!-- Page Hero -->
         <section class="page-hero">
-            <div class="page-hero__bg">
-                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2072&auto=format&fit=crop"
-                    alt="Blog de Limpieza" class="page-hero__img">
+            <div class="page-hero__bg" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                <div class="page-hero__overlay" style="background: rgba(0,0,0,0.15);"></div>
             </div>
-            <div class="page-hero__overlay"></div>
             <div class="container page-hero__content">
-                <h1 class="page-hero__title">Nuestro Blog</h1>
-                <p class="page-hero__subtitle">Noticias, consejos y actualizaciones sobre limpieza y mantenimiento.</p>
+                <h1 class="page-hero__title">Blog de Limpieza Profesional</h1>
+                <p class="page-hero__subtitle">Consejos y guías especializadas en limpieza para comunidades, garajes y oficinas de Torrevieja y Vega Baja.</p>
             </div>
         </section>
 
-        <section class="section-padding">
+        <nav class="blog-cats" aria-label="Categorías del blog">
             <div class="container">
-                <div class="services__grid"> <!-- Reusing services grid for blog layout consistency -->
-                    {posts && posts.length > 0 ? (
-                        posts.map((post) => (
-                            <article class="service-card">
-                                <div class="service-card__image">
-                                    <img src={post.image_url || '/blog-placeholder.jpg'} alt={post.title} style="width: 100%; height: 260px; object-fit: cover;">
-                                </div>
-                                <div class="service-card__content">
-                                    <span class="section-tag">{post.tag || 'General'}</span>
-                                    <h3 class="service-card__title">{post.title}</h3>
-                                    <p class="service-card__desc">{post.description}</p>
-                                    <a href={`/post/${post.slug}`} class="link-arrow">Leer más <span>→</span></a>
-                                </div>
-                            </article>
-                        ))
-                    ) : (
-                        <p style="grid-column: 1 / -1; text-align: center; color: #64748b;">No hay artículos publicados todavía.</p>
-                    )}
-                </div>
+                <ul class="cats-list">
+                    {CATEGORIAS.map(c => (
+                        <li>
+                            <a href={c.slug === 'todos' ? '/blog' : `/blog/categoria/${c.slug}`} class="cat-link">{c.nombre}</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </nav>
+
+        <section class="section-padding" style="padding-top: 3rem;">
+            <div class="container">
+                {posts && posts.length > 0 ? (
+                    <>
+                        <div class="services__grid">
+                            {posts.map((post) => (
+                                <article class="service-card">
+                                    <div class="service-card__image">
+                                        <img src={post.image_url || '/blog-comunidades.png'} alt={post.title} loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
+                                    </div>
+                                    <div class="service-card__content">
+                                        <span class="section-tag">{post.category || post.tag || 'General'}</span>
+                                        <h2 class="service-card__title" style="font-size: 1.2rem;">{post.title}</h2>
+                                        <p class="service-card__desc">{post.description}</p>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                                            <span style="font-size: 0.8rem; color: #94a3b8;">{post.reading_time || 5} min lectura</span>
+                                            <a href={`/post/${post.slug}`} class="link-arrow">Leer →</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+
+                        {totalPages > 1 && (
+                            <nav class="pagination" aria-label="Paginación" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+                                {page > 1 && <a href={`/blog?page=${page - 1}`} class="button button--outline">← Anterior</a>}
+                                <span style="display: flex; align-items: center; padding: 0 1rem; color: #64748b;">Página {page} de {totalPages}</span>
+                                {page < totalPages && <a href={`/blog?page=${page + 1}`} class="button button--outline">Siguiente →</a>}
+                            </nav>
+                        )}
+                    </>
+                ) : (
+                    <div style="text-align: center; padding: 4rem 2rem; max-width: 600px; margin: 0 auto;">
+                        <h2 style="color: #1e293b; margin-bottom: 1rem;">Estamos preparando contenido para ti</h2>
+                        <p style="color: #64748b; margin-bottom: 2rem;">Muy pronto publicaremos artículos con consejos profesionales de limpieza. Mientras tanto, ¿en qué podemos ayudarte?</p>
+                        <a href="/contacto" class="button button--primary">Pedir presupuesto</a>
+                    </div>
+                )}
             </div>
         </section>
     </main>
 </Layout>
+
+<style>
+    .blog-cats {
+        background: white;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+    }
+    .cats-list {
+        display: flex;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .cats-list::-webkit-scrollbar { display: none; }
+    .cat-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #f1f5f9;
+        color: #475569;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.15s;
+    }
+    .cat-link:hover {
+        background: #3b82f6;
+        color: white;
+    }
+</style>
