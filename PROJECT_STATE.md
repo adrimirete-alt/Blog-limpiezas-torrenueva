@@ -16,12 +16,15 @@
 - Link CRM en dashboard admin
 - 404 personalizada
 
-## En curso
-- Hero local (sin Unsplash)
-- CTA hero → calculadora
-- Schema Review en /testimonios
-- Form /contacto → /api/lead
-- CSS .nav--open móvil
+## Despliegue completado (2026-06-08)
+- Supabase nuevo proyecto: dwnxmzbqdnoizhvtzzex (ACTIVE_HEALTHY, eu-west-1)
+- SQLs ejecutados: supabase_blog_v2.sql, supabase_leads.sql, supabase_seed_posts.sql
+- Admin user creado: info@limpiezastorrenueva.com
+- Vercel env vars actualizadas: PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+- Dominio verificado: limpiezastorrenueva.com + www.limpiezastorrenueva.com
+- 5 artículos de blog en producción
 
 ## Pendiente
-- Build + commit + push final
+- Google Search Console: enviar sitemap https://limpiezastorrenueva.com/sitemap-index.xml
+- GBP: seguir guía en docs/google-business-profile.md
+- GA4: proporcionar Measurement ID (G-XXXXXXXX) para activar analytics
