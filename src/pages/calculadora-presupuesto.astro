@@ -1,5 +1,4 @@
 ---
-export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import { localidades } from '../data/localidades.js';
 ---
@@ -190,20 +189,34 @@ import { localidades } from '../data/localidades.js';
         data.fuente = 'calculadora';
 
         try {
-            const res = await fetch('/api/lead', {
+            // Calculate budget range client-side for static hosting
+            const tipo = data.tipo_propiedad;
+            const m2 = parseInt(data.m2 || 100);
+            const ranges = {
+                comunidad: { base: 3.5, max: 8 },
+                garaje: { base: 0.8, max: 2 },
+                oficina: { base: 4, max: 10 },
+                industrial: { base: 1.5, max: 4 },
+            };
+            const r = ranges[tipo] || { base: 3, max: 7 };
+            const min = Math.round(m2 * r.base);
+            const max = Math.round(m2 * r.max);
+
+            // Also send to FormSubmit for lead capture
+            const formSubmitData = new FormData();
+            Object.entries(data).forEach(([k, v]) => formSubmitData.append(k, v));
+            formSubmitData.append('_subject', 'Nueva solicitud de presupuesto (Calculadora)');
+            formSubmitData.append('_captcha', 'false');
+            fetch('https://formsubmit.co/info@limpiezastorrenueva.com', {
                 method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            const json = await res.json();
-            if (!res.ok) throw new Error(json.error || 'Error');
+                body: formSubmitData,
+            }).catch(() => {});
 
             form.style.display = 'none';
             result.style.display = 'block';
-            const range = json.presupuesto;
-            document.getElementById('priceRange').textContent = `${range.min} – ${range.max} €/mes`;
+            document.getElementById('priceRange').textContent = `${min} – ${max} €/mes`;
         } catch (err) {
-            alert('Hubo un error: ' + err.message + '. Por favor, llámanos al 604 438 618.');
+            alert('Hubo un error. Por favor, llámanos al 604 438 618.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Calcular mi presupuesto';
         }

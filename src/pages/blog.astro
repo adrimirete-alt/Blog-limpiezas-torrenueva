@@ -1,8 +1,6 @@
 ---
-export const prerender = false;
-
 import Layout from '../layouts/Layout.astro';
-import { supabase } from '../lib/supabase';
+import { POSTS_STATIC } from '../data/posts-static.js';
 
 const CATEGORIAS = [
     { slug: 'todos', nombre: 'Todos' },
@@ -15,33 +13,7 @@ const CATEGORIAS = [
     { slug: 'consejos', nombre: 'Consejos' },
 ];
 
-const url = new URL(Astro.request.url);
-const page = parseInt(url.searchParams.get('page') || '1', 10);
-const PER_PAGE = 9;
-const from = (page - 1) * PER_PAGE;
-const to = from + PER_PAGE - 1;
-
-let posts = [];
-let total = 0;
-
-try {
-    let query = supabase
-        .from('posts')
-        .select('*', { count: 'exact' })
-        .eq('published', true)
-        .order('created_at', { ascending: false })
-        .range(from, to);
-
-    const { data, error, count } = await query;
-    if (!error) {
-        posts = data || [];
-        total = count || 0;
-    }
-} catch (e) {
-    console.error('Supabase connection failed:', e);
-}
-
-const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+const posts = POSTS_STATIC;
 ---
 <Layout
     title="Blog de Limpieza Profesional en Torrevieja | Limpiezas Torrenueva"
@@ -73,38 +45,28 @@ const totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
         <section class="section-padding" style="padding-top: 3rem;">
             <div class="container">
                 {posts && posts.length > 0 ? (
-                    <>
-                        <div class="services__grid">
-                            {posts.map((post) => (
-                                <article class="service-card">
-                                    <div class="service-card__image">
-                                        <img src={post.image_url || '/blog-comunidades.png'} alt={post.title} loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
+                    <div class="services__grid">
+                        {posts.map((post) => (
+                            <article class="service-card">
+                                <div class="service-card__image">
+                                    <img src={post.image_url || '/blog-comunidades.png'} alt={post.title} loading="lazy" style="width: 100%; height: 220px; object-fit: cover;">
+                                </div>
+                                <div class="service-card__content">
+                                    <span class="section-tag">{post.category || 'General'}</span>
+                                    <h2 class="service-card__title" style="font-size: 1.2rem;">{post.title}</h2>
+                                    <p class="service-card__desc">{post.description}</p>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                                        <span style="font-size: 0.8rem; color: #94a3b8;">{post.reading_time || 5} min lectura</span>
+                                        <a href={`/post/${post.slug}`} class="link-arrow">Leer →</a>
                                     </div>
-                                    <div class="service-card__content">
-                                        <span class="section-tag">{post.category || post.tag || 'General'}</span>
-                                        <h2 class="service-card__title" style="font-size: 1.2rem;">{post.title}</h2>
-                                        <p class="service-card__desc">{post.description}</p>
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-                                            <span style="font-size: 0.8rem; color: #94a3b8;">{post.reading_time || 5} min lectura</span>
-                                            <a href={`/post/${post.slug}`} class="link-arrow">Leer →</a>
-                                        </div>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-
-                        {totalPages > 1 && (
-                            <nav class="pagination" aria-label="Paginación" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
-                                {page > 1 && <a href={`/blog?page=${page - 1}`} class="button button--outline">← Anterior</a>}
-                                <span style="display: flex; align-items: center; padding: 0 1rem; color: #64748b;">Página {page} de {totalPages}</span>
-                                {page < totalPages && <a href={`/blog?page=${page + 1}`} class="button button--outline">Siguiente →</a>}
-                            </nav>
-                        )}
-                    </>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
                 ) : (
                     <div style="text-align: center; padding: 4rem 2rem; max-width: 600px; margin: 0 auto;">
                         <h2 style="color: #1e293b; margin-bottom: 1rem;">Estamos preparando contenido para ti</h2>
-                        <p style="color: #64748b; margin-bottom: 2rem;">Muy pronto publicaremos artículos con consejos profesionales de limpieza. Mientras tanto, ¿en qué podemos ayudarte?</p>
+                        <p style="color: #64748b; margin-bottom: 2rem;">Muy pronto publicaremos artículos con consejos profesionales de limpieza.</p>
                         <a href="/contacto" class="button button--primary">Pedir presupuesto</a>
                     </div>
                 )}

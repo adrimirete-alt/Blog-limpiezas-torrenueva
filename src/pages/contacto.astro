@@ -115,14 +115,16 @@ import { localidades } from '../data/localidades.js';
                 data.consent_marketing = form.querySelector('[name="consent_marketing"]').checked;
                 data.fuente = 'contacto';
                 try {
-                    const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
-                    const json = await res.json();
-                    if (!res.ok) throw new Error(json.error || 'Error');
+                    const fd = new FormData(form);
+                    fd.append('_subject', 'Nuevo presupuesto solicitado (Contacto)');
+                    fd.append('_captcha', 'false');
+                    const res = await fetch('https://formsubmit.co/info@limpiezastorrenueva.com', { method: 'POST', body: fd });
+                    if (!res.ok) throw new Error('Error');
                     form.style.display = 'none';
                     status.innerHTML = '<div style="background:#d1fae5;color:#065f46;padding:1.25rem;border-radius:12px;text-align:center;"><strong>✓ Mensaje enviado correctamente.</strong><br>Te llamaremos en menos de 24 horas.</div>';
                     if (window.gtag) gtag('event', 'lead_form_submitted', { source: 'contacto' });
                 } catch (err) {
-                    status.innerHTML = `<div style="background:#fef2f2;color:#dc2626;padding:1rem;border-radius:8px;">Error: ${err.message}. Llámanos al 604 438 618.</div>`;
+                    status.innerHTML = `<div style="background:#fef2f2;color:#dc2626;padding:1rem;border-radius:8px;">Error al enviar. Llámanos al 604 438 618.</div>`;
                     btn.disabled = false;
                     btn.textContent = 'Enviar mensaje';
                 }

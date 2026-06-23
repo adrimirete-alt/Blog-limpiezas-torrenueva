@@ -1,54 +1,21 @@
 ---
-export const prerender = false;
-
 import Layout from '../../layouts/Layout.astro';
-import { supabase } from '../../lib/supabase';
+import { POSTS_STATIC } from '../../data/posts-static.js';
 import { processContent, extractFAQs, suggestInternalLinks, countWords } from '../../lib/post-utils.js';
 
-const { slug } = Astro.params;
-
-let post;
-let relatedPosts = [];
-
-try {
-    const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('slug', slug)
-        .eq('published', true)
-        .single();
-
-    if (error) throw error;
-    post = data;
-
-    if (post) {
-        const { data: related } = await supabase
-            .from('posts')
-            .select('id, title, slug, description, image_url, category, reading_time')
-            .eq('published', true)
-            .eq('category', post.category)
-            .neq('id', post.id)
-            .order('created_at', { ascending: false })
-            .limit(3);
-        relatedPosts = related || [];
-
-        // Fallback: si no hay relacionados de la misma categoría, traer últimos 3
-        if (!relatedPosts.length) {
-            const { data: fallback } = await supabase
-                .from('posts')
-                .select('id, title, slug, description, image_url, category, reading_time')
-                .eq('published', true)
-                .neq('id', post.id)
-                .order('created_at', { ascending: false })
-                .limit(3);
-            relatedPosts = fallback || [];
-        }
-    }
-} catch (e) {
-    return Astro.redirect('/blog');
+export async function getStaticPaths() {
+    return POSTS_STATIC.map(p => ({ params: { slug: p.slug } }));
 }
 
+const { slug } = Astro.params;
+const post = POSTS_STATIC.find(p => p.slug === slug);
 if (!post) return Astro.redirect('/blog');
+
+const relatedPosts = POSTS_STATIC
+    .filter(p => p.slug !== slug && p.category === post.category)
+    .slice(0, 3)
+    .concat(POSTS_STATIC.filter(p => p.slug !== slug && p.category !== post.category).slice(0, 3 - Math.min(3, POSTS_STATIC.filter(p => p.slug !== slug && p.category === post.category).length)))
+    .slice(0, 3);
 
 const { html: processedHtml, toc } = processContent(post.content || '');
 const faqs = extractFAQs(post.content || '');

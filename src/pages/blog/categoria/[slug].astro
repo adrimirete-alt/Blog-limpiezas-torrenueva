@@ -1,10 +1,6 @@
 ---
-export const prerender = false;
-
 import Layout from '../../../layouts/Layout.astro';
-import { supabase } from '../../../lib/supabase';
-
-const { slug } = Astro.params;
+import { POSTS_STATIC } from '../../../data/posts-static.js';
 
 const CATEGORIAS = {
     comunidades: { nombre: 'Limpieza de Comunidades', desc: 'Guías y consejos para la limpieza de comunidades de vecinos en Torrevieja y Vega Baja.' },
@@ -16,21 +12,14 @@ const CATEGORIAS = {
     consejos: { nombre: 'Consejos Prácticos', desc: 'Trucos y consejos profesionales para una limpieza eficaz.' },
 };
 
-const categoria = CATEGORIAS[slug];
-if (!categoria) return Astro.redirect('/blog');
-
-let posts = [];
-try {
-    const { data } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('published', true)
-        .eq('category', slug)
-        .order('created_at', { ascending: false });
-    posts = data || [];
-} catch (e) {
-    console.error(e);
+export async function getStaticPaths() {
+    const cats = ['comunidades', 'garajes', 'oficinas', 'industrial', 'maquinaria', 'zonas', 'consejos'];
+    return cats.map(slug => ({ params: { slug } }));
 }
+
+const { slug } = Astro.params;
+const categoria = CATEGORIAS[slug];
+const posts = POSTS_STATIC.filter(p => p.category === slug);
 ---
 <Layout
     title={`${categoria.nombre} en Torrevieja | Blog Limpiezas Torrenueva`}
